@@ -1,0 +1,41 @@
+.image-placeholder {
+  max-width: 400px;
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: 15px;
+  border: 1px dashed #cccccc;
+  padding: 15px; }
+  .image-placeholder img {
+    max-width: 100%; }
+
+.remove {
+  background: darkred;
+  border: none;
+  color: #ffffff; }
+  .remove:hover {
+    background: red;
+    cursor: pointer; }
+  .remove:focus {
+    outline: none; }
+
+#trackDownloads td {
+  vertical-align: middle; }
+#trackDownloads thead th {
+  font-weight: bold; }
+#trackDownloads h3 {
+  margin-top: 0; }
+#trackDownloads audio {
+  vertical-align: middle; }
+#trackDownloads .remove-download {
+  background: none;
+  color: darkred;
+  padding-left: 10px; }
+  #trackDownloads .remove-download:hover {
+    cursor: pointer; }
+
+#download_frm {
+  margin-top: 25px; }
+
+.track-artwork {
+  width: 100px; }

@@ -1,0 +1,287 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: "Eurostile", sans-serif;
+	background: darken($white, 5%);
+	font-size: 14pt;
+	color: lighten($black, 15%);
+}
+a {
+	&:hover {
+		text-decoration: none;
+	}
+}
+img {
+	max-width: 100%;
+	margin: 0 auto;
+	display: block;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-family: "LemonMilk", sans-serif;
+	letter-spacing: 1px;
+	color: $purp;
+}
+h2.secTitle {
+	color: $purp;
+	font-size: 18pt;
+	margin: 25px 0;
+	span {
+		display: inline-block;
+		background: darken($white, 5%);
+		position: relative;
+		z-index: 2;
+		margin-left: 50px;
+		padding: 0 15px;
+	}
+	&:after {
+		content:"";
+		height: 1px;
+		background: $mint;
+		width: 100%;
+		display: block;
+		position: relative;
+		top: -13px;
+		z-index: 1;
+	}
+}
+.outer {
+	/* W3C */
+	display: inline-flex !important;
+    box-pack: center !important;
+    box-align: center !important;
+	/* Safari, Opera, and Chrome */
+	display: -webkit-inline-flex !important;
+	-webkit-box-pack: center !important;
+	-webkit-box-align: center !important;
+	-webkit-align-items: center !important;
+	 /* Firefox */
+	display: -moz-inline-flexbox !important;
+	-moz-box-pack: center !important;
+	-moz-box-align: center !important;
+	-moz-align-items: center !important;
+	height: 100%;
+	width: 100%;
+	align-items: center !important;
+	.inner {
+		margin: auto 0;
+		width: 100%;
+	}
+}
+#homeMenu {
+	position: fixed;
+	top: 15px;
+	right: 15px;
+	z-index: 10;
+	.socialWrap {
+		display: inline-block;
+		vertical-align: middle;
+		a {
+			display: inline-block;
+			width: 35px;
+			height: 35px;
+			background: $white;
+			@include border-top-radius(50%);
+			@include border-bottom-radius(50%);
+			text-align: center;
+			i {
+				line-height: 35px;
+				font-size: 16pt;
+			}
+			&.facebook {
+				color: $facebook;
+				&:hover {
+					background: $facebook;
+					color: $white;
+				}
+			}
+			&.twitter {
+				color: $twitter;
+				&:hover {
+					background: $twitter;
+					color: $white;
+				}
+			}
+			&.instagram {
+				color: $instagram;
+				&:hover {
+					background: $instagram;
+					color: $white;
+				}
+			}
+			&.pinterest {
+				color: $pinterest;
+				&:hover {
+					background: $pinterest;
+					color: $white;
+				}
+			}
+			&.youtube {
+				color: $youtube;
+				&:hover {
+					background: $youtube;
+					color: $white;
+				}
+			}
+		}
+	}
+	button {
+		display: inline-block;
+		background: $mint;
+		color: $white;
+		@include border-top-radius(0);
+		@include border-bottom-radius(0);
+		font-size: 24pt;
+		padding: 0 10px;
+		&:focus {
+			outline: none;
+		}
+	}
+}
+#MenuDropdown {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: 9;
+	background: $mint;
+	height: 100vh;
+	ul {
+		margin: 0;
+		padding: 0;
+		li {
+			a {
+				color: darken($mint,50%);
+				font-size: 24pt;
+				display: block;
+				line-height: 60px;
+				&:hover {
+					background: darken($mint, 5%);
+				}
+			}
+		}
+	}
+}
+.sticky {
+	background: $purp;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	h1 {
+		font-family: "Always", sans-serif;
+		color: $white;
+		font-size: 48pt;
+		margin: 10px 0 0;
+		padding: 0;
+	}
+}
+.header-CTA {
+	height: 100vh;
+	#newsletter-frm-1 {
+		background: $white;
+		box-sizing: border-box;
+		position: relative;
+		padding: 10px 15px;
+		.cta-title {
+			color: $purp;
+			text-transform: uppercase;
+			font-family: "LemonMilk", sans-serif;
+			font-weight: bold;
+			letter-spacing: 1px;
+			margin: 0;
+			padding: 0;
+			line-height: 40px;
+		}
+		input {
+			border: none;
+			border-bottom: 1px solid darken($white, 10%);
+			font-size: 16pt;
+			box-shadow: none;
+			@include border-top-radius(0);
+			@include border-bottom-radius(0);
+			padding: 0;
+			line-height: 40px;
+			height: 40px;
+			&#emailaddress_1 {
+				padding-right: 50px;
+			}
+		}
+		button {
+			display: block;
+			width: 100%;
+			background: $mint;
+			border: none;
+			color:  $white;
+			line-height: 40px;
+			padding: 0 15px;
+			text-transform: uppercase;
+		}
+	}
+	#purpleBar {
+		background: rgba(70,29,141,0.95);
+		h1 {
+			font-family: "Always", sans-serif;
+			color: $white;
+			font-size: 120pt;
+			text-align: left;
+			margin: 100px 0 0;
+			padding: 0;
+		}
+	}
+}
+.featured-post {
+	.featured-image {
+		height: 400px;
+	}
+	.featured-copy {
+		height: 400px;
+		padding: 0 100px;
+		border: 1px solid darken($white, 10%);
+		background: $white;
+	}
+}
+#filters {
+	margin: 50px 0;
+	&:after {
+		content:"";
+		height: 1px;
+		background: $mint;
+		width: 100%;
+		display: block;
+		position: relative;
+		top: -13px;
+		z-index: 1;
+	}
+	.btn-filter {
+		display: block;
+		width: 100%;
+		background: $mint;
+		font-size: 14pt;
+		text-align: left;
+		text-transform: uppercase;
+		letter-spacing: 1px;
+		color: darken($mint, 50%);
+		span {
+			color: $white;
+			font-size: 12pt;
+		}
+		i {
+			margin-top: 5px;
+			float: right;
+			color: darken($mint, 50%);
+		}
+	}
+}
+.listing {
+	margin: 0 -15px;
+	.post-image {
+		height: 250px;
+	}
+	h3 {
+		font-family: "Eurostile", sans-serif;
+		color: lighten($black, 15%);
+		font-size: 14pt;
+		margin: 5px 0 0;
+	}
+}

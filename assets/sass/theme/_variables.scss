@@ -1,0 +1,30 @@
+// Colors
+$purp: #463179;
+$mint: #91daba;
+
+$black: #111111;
+$white: #ffffff;
+
+$facebook: #3b5998;
+$twitter: #00aced;
+$pinterest: #C92228;
+$instagram: #125688;
+$youtube: #bb0000;
+
+// Fonts
+@font-face {
+    font-family: "Always";
+    src: url("assets/fonts/AlwaysForever.ttf") format("truetype");
+		 // url("fonts/Mayfair.eot?") format("eot"),
+         // url("fonts/Mayfair.woff2") format("woff2"),
+         // url("fonts/Mayfair.woff") format("woff"),
+         // url("fonts/Mayfair.svg#Samplino") format("svg");
+}
+@font-face {
+    font-family: "LemonMilk";
+    src: url("assets/fonts/LemonMilk.otf") format("opentype");
+		 // url("fonts/Mayfair.eot?") format("eot"),
+         // url("fonts/Mayfair.woff2") format("woff2"),
+         // url("fonts/Mayfair.woff") format("woff"),
+         // url("fonts/Mayfair.svg#Samplino") format("svg");
+}
