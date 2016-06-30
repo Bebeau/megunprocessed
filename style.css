@@ -389,8 +389,33 @@ h2.secTitle {
     letter-spacing: 0;
     text-transform: capitalize; }
 
+#UnprocessedProductions {
+  margin-top: 50px;
+  height: 100vh;
+  background: url("assets/images/up_bg.jpg") no-repeat scroll center/cover;
+  position: relative; }
+  #UnprocessedProductions .copy {
+    background: #ffffff;
+    padding: 25px;
+    height: 300px; }
+    #UnprocessedProductions .copy img {
+      width: 300px; }
+    #UnprocessedProductions .copy .btn {
+      width: 300px;
+      margin: 25px auto 0;
+      display: block;
+      position: relative;
+      z-index: 10; }
+  #UnprocessedProductions .camera {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: url("assets/images/camera.png") no-repeat scroll center right/contain;
+    height: 90vh;
+    width: 75%;
+    display: block; }
+
 footer {
-  margin-top: 75px;
   padding-top: 50px;
   font-size: 12pt;
   border-top: 1px solid #91daba;
@@ -424,7 +449,7 @@ footer {
     line-height: normal;
     color: #463179; }
   footer #SignUp {
-    background: #ffffff;
+    background: #f2f2f2;
     box-sizing: border-box;
     padding: 15px; }
     footer #SignUp h3 {
