@@ -7,20 +7,30 @@ html, body {
 	font-size: 14pt;
 	color: lighten($black, 15%);
 }
+p {
+	margin: 25px 0;
+}
 a {
+	color: $purp;
 	&:hover {
 		text-decoration: none;
 	}
 }
 img {
 	max-width: 100%;
+	height: auto;
 	margin: 0 auto;
 	display: block;
 }
 h1,h2,h3,h4,h5,h6 {
 	font-family: "LemonMilk", sans-serif;
-	letter-spacing: 1px;
+	letter-spacing: 1px !important;
 	color: $purp;
+}
+input, textarea, button, a {
+	&:focus {
+		outline: none !important;
+	}
 }
 h2.secTitle {
 	color: $purp;
@@ -68,73 +78,141 @@ h2.secTitle {
 		width: 100%;
 	}
 }
+#header-pad {
+	padding-top: 145px;
+}
+.btn {
+	display: inline-block;
+	background: $mint;
+	color: $white;
+	@include border-top-radius(0);
+	@include border-bottom-radius(0);
+	font-size: 18pt;
+	padding: 0 10px;
+	line-height: 40px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	&:focus {
+		outline: none;
+	}
+}
+.playwrap {
+	background: $purp;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin: -50px 0 0 -50px;
+	width: 100px;
+	height: 100px;
+	@include border-right-radius(50%);
+	@include border-left-radius(50%);
+	border: 5px solid #fff;
+	@include transform(scale(0.75));
+	@include transition(all, 0.25s, ease-out);
+	i {
+		text-align: center;
+		font-size: 48px;
+		display: block;
+		color: #fff;
+		z-index: 100;
+		position: relative;
+		padding: 22px;
+		&.fa-play {
+			left: 5px;
+		}
+	}
+}
+#customBreadcrumbs {
+	background: $white;
+	border-bottom: 1px solid $mint;
+	#breadcrumbs {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		line-height: normal;
+		text-transform: uppercase;
+		text-align: left;
+		li {
+			margin: 0;
+			padding: 0 5px;
+			display: inline-block;
+			font-size: 8pt;
+			color: $mint;
+			line-height: 24px;
+			&:first-child {
+				padding-left: 0;
+			}
+			* {
+				color: $purp;
+			}
+		}
+	}
+}
+#archive {
+	.listing {
+		margin-bottom: 50px;
+	}
+}
+.socialWrap {
+	display: inline-block;
+	vertical-align: middle;
+	a {
+		display: inline-block;
+		width: 35px;
+		height: 35px;
+		background: $white;
+		@include border-top-radius(50%);
+		@include border-bottom-radius(50%);
+		text-align: center;
+		i {
+			line-height: 35px;
+			font-size: 16pt;
+		}
+		&.facebook {
+			color: $facebook;
+			&:hover {
+				background: $facebook;
+				color: $white;
+			}
+		}
+		&.twitter {
+			color: $twitter;
+			&:hover {
+				background: $twitter;
+				color: $white;
+			}
+		}
+		&.instagram {
+			color: $instagram;
+			&:hover {
+				background: $instagram;
+				color: $white;
+			}
+		}
+		&.pinterest {
+			color: $pinterest;
+			&:hover {
+				background: $pinterest;
+				color: $white;
+			}
+		}
+		&.youtube {
+			color: $youtube;
+			&:hover {
+				background: $youtube;
+				color: $white;
+			}
+		}
+	}
+}
 #homeMenu {
 	position: fixed;
 	top: 15px;
 	right: 15px;
 	z-index: 10;
-	.socialWrap {
-		display: inline-block;
-		vertical-align: middle;
-		a {
-			display: inline-block;
-			width: 35px;
-			height: 35px;
-			background: $white;
-			@include border-top-radius(50%);
-			@include border-bottom-radius(50%);
-			text-align: center;
-			i {
-				line-height: 35px;
-				font-size: 16pt;
-			}
-			&.facebook {
-				color: $facebook;
-				&:hover {
-					background: $facebook;
-					color: $white;
-				}
-			}
-			&.twitter {
-				color: $twitter;
-				&:hover {
-					background: $twitter;
-					color: $white;
-				}
-			}
-			&.instagram {
-				color: $instagram;
-				&:hover {
-					background: $instagram;
-					color: $white;
-				}
-			}
-			&.pinterest {
-				color: $pinterest;
-				&:hover {
-					background: $pinterest;
-					color: $white;
-				}
-			}
-			&.youtube {
-				color: $youtube;
-				&:hover {
-					background: $youtube;
-					color: $white;
-				}
-			}
-		}
-	}
-	button {
-		display: inline-block;
-		background: $mint;
-		color: $white;
-		@include border-top-radius(0);
-		@include border-bottom-radius(0);
-		font-size: 24pt;
-		padding: 0 10px;
-		&:focus {
-			outline: none;
+	.btn-menu {
+		&:active {
+			box-shadow: none !important;
 		}
 	}
 }
@@ -162,18 +240,54 @@ h2.secTitle {
 		}
 	}
 }
+.single-content {
+	box-sizing: border-box;
+    background: #fff;
+    padding: 50px;
+    font-size: 14pt;
+}
 .sticky {
 	background: $purp;
 	position: fixed;
 	top: 0;
 	left: 0;
 	width: 100%;
+	vertical-align: middle;
+	z-index: 999;
+	.container-fluid {
+		position: relative;
+		z-index: 10;
+	}
 	h1 {
 		font-family: "Always", sans-serif;
 		color: $white;
 		font-size: 48pt;
 		margin: 10px 0 0;
-		padding: 0;
+		position: relative;
+		bottom: -10px;
+		padding: 0 0 15px;
+		display: inline-block;
+	}
+	.btn {
+		background: transparent;
+		line-height: 95px;
+		&:hover {
+			color: $white;
+		}
+	}
+	#Navigation {
+		position: absolute;
+		right: 15px;
+		top: 0;
+	}
+	.wideAd_placeholder {
+		width: 729px;
+		height: 90px;
+		background: darken($purp, 10%);
+		display: inline-block;
+		vertical-align: middle;
+		float: right;
+		margin-top: 2.5px;
 	}
 }
 .header-CTA {
@@ -192,6 +306,7 @@ h2.secTitle {
 			margin: 0;
 			padding: 0;
 			line-height: 40px;
+			text-align: center;
 		}
 		input {
 			border: none;
@@ -220,12 +335,15 @@ h2.secTitle {
 	}
 	#purpleBar {
 		background: rgba(70,29,141,0.95);
+		#BarTitle {
+			height: 340px;
+		}
 		h1 {
 			font-family: "Always", sans-serif;
 			color: $white;
 			font-size: 120pt;
 			text-align: left;
-			margin: 100px 0 0;
+			margin: 0 0 -25px;
 			padding: 0;
 		}
 	}
@@ -250,7 +368,7 @@ h2.secTitle {
 		width: 100%;
 		display: block;
 		position: relative;
-		top: -13px;
+		top: -30px;
 		z-index: 1;
 	}
 	.btn-filter {
@@ -262,11 +380,17 @@ h2.secTitle {
 		text-transform: uppercase;
 		letter-spacing: 1px;
 		color: darken($mint, 50%);
+		position: relative;
+		z-index: 2;
+		line-height: 60px;
+		height: 60px;
+		padding: 0 15px;
 		span {
 			color: $white;
 			font-size: 12pt;
 		}
 		i {
+			line-height: 50px;
 			margin-top: 5px;
 			float: right;
 			color: darken($mint, 50%);
@@ -274,14 +398,128 @@ h2.secTitle {
 	}
 }
 .listing {
-	margin: 0 -15px;
+	margin: 0 -30px;
 	.post-image {
 		height: 250px;
 	}
 	h3 {
 		font-family: "Eurostile", sans-serif;
-		color: lighten($black, 15%);
-		font-size: 14pt;
+		color: lighten($black, 25%);
+		font-size: 12pt;
 		margin: 5px 0 0;
+		letter-spacing: 0;
+		text-transform: capitalize;
+	}
+}
+footer {
+	margin-top: 75px;
+	padding-top: 50px;
+	font-size: 12pt;
+	border-top: 1px solid $mint;
+	background: $white;
+	h2 {
+		font-family: "Always", sans-serif;
+		font-size: 72pt;
+		margin: 50px 0 0;
+		text-align: right;
+	}
+	.socialWrap {
+		position: absolute;
+		right: 25px;
+		bottom: -10px;
+		a {
+			width: 35px;
+			height: 35px;
+			background: $purp;
+			color: $white;
+			@include border-top-radius(50%);
+			@include border-bottom-radius(50%);
+			display: inline-block;
+			text-align: center;
+			i {
+				line-height: 35px;
+				color: $white;
+			}
+		}
+	}
+	.timeline {
+		margin: 60px 0 0;
+		font-size: 24pt;
+		line-height: normal;
+		color: $purp;
+	}
+	#SignUp {
+		background: $white;
+		box-sizing: border-box;
+		padding: 15px;
+		h3 {
+			margin: 0 0 15px;
+			padding: 0;
+			text-align: center;
+		}
+		form {
+			input {
+				border: none;
+				border-bottom: 1px solid darken($white, 10%);
+				font-size: 16pt;
+				box-shadow: none;
+				@include border-top-radius(0);
+				@include border-bottom-radius(0);
+				padding: 0;
+				line-height: 40px;
+				height: 40px;
+				background: none;
+				width: 100%;
+			}
+			.btn {
+				width: 100%;
+			}
+		}
+	}
+	#legal {
+		text-align: center;
+		margin: 50px auto 25px;
+		ul {
+			margin: 0;
+			padding: 0;
+			li {
+				display: inline-block;
+				a {
+					padding: 0 10px;
+					border-left: 1px solid darken($white, 25%);
+				}
+				&:first-child {
+					a {
+						border: none;
+					}
+				}
+			}
+		}
+	}
+}
+#singleRecipe {
+	h1,h2,h3,h4,h5,h6 {
+		color: $purp;
+	}
+	.stat {
+		background: darken($white, 10%) !important;
+		color: $purp !important;
+	}
+	ul, ol {
+		margin: 0;
+		li {
+			margin: 10px 0;
+			line-height: 24px;
+		}
+	}
+	.single-content {
+		h3 {
+			margin: 25px 0 15px;
+		}
+	}
+	.related-posts {
+		.listing {
+			margin: inherit;
+		}
 	}
 }

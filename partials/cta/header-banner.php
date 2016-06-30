@@ -15,8 +15,12 @@ if(!empty($homeBanner)) {
 						<div class="col-md-4 col-md-offset-1">
 							<img src="<?php echo bloginfo('template_directory'); ?>/assets/images/placeholder.png" alt="" />
 						</div>
-						<div class="col-md-7">
-							<h1>Megunprocessed</h1>
+						<div class="col-md-7" id="BarTitle">
+							<div class="outer">
+								<div class="inner">
+									<h1>Megunprocessed</h1>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -25,10 +29,10 @@ if(!empty($homeBanner)) {
 				<div class="row">
 					<form role="form" class="form" id="newsletter-frm-1" data-form="1" method="post" action="<?php echo bloginfo('template_directory');?>/partials/forms/newsletter.php">
 						<div class="row">
-							<div class="col-md-3">
+							<div class="col-md-4">
 								<h3 class="cta-title">Get a free eBook</h3>
 							</div>
-							<div class="col-md-8">
+							<div class="col-md-7">
 								<div class="row">
 									<div class="col-md-4">
 										<input type="text" name="firstname_1" id="firstname_1" placeholder="first name" class="form-control"/>

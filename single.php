@@ -1,59 +1,6 @@
 <?php get_header(); ?>
 
-	<div class="container post-single">
-
-		<div class="post-header">
-			<?php
-			$ptype = get_post_type();
-			if (is_category() && !is_category('Blog') && !is_category('Reviews') && !is_category('Recipes')) { ?>
-			    <h1 class="archive-title" >
-			        <span><?php echo single_cat_title(); ?></span>
-			    </h1>
-			    <?php } elseif (is_day()) { ?>
-			    <h1 class="archive-title">
-			      	Philo<span class="cursive">Sophie</span> - <?php the_time('F jS, Y'); ?>
-			    </h1>
-			    <?php } elseif (is_month()) { ?>
-			    <h1 class="archive-title">
-			      	Philo<span class="cursive">Sophie</span> - <?php the_time('F, Y'); ?>
-			    </h1>
-			    <?php } elseif (is_year()) { ?>
-			    <h1 class="archive-title">
-			      	Philo<span class="cursive">Sophie</span> - <?php the_time('Y'); ?>
-			    </h1>
-			    <?php } elseif (is_author()) { ?>
-			    <h1 class="archive-title">
-			        Philo<span class="cursive">Sophie</span> - <?php echo $curauth->nickname; ?>
-			    </h1>
-			    <?php } elseif (is_tag()) { ?>
-			    <h1 class="archive-title">
-			        <?php echo single_tag_title('', true); ?> 
-			    </h1>
-			    <?php } elseif ($ptype === 'reviews') { ?>
-			    	<h1 class="archive-title"><span class="cursive">
-			    		Sophie's</span> Reviews
-			    	</h1>
-		    	<?php } elseif ($ptype === 'recipes') { ?>
-			    	<h1 class="archive-title">
-			    		<span class="cursive">Sophie's</span> Recipes
-			    	</h1>
-			<?php } else {
-				if(has_category('Blog')) { ?>
-					<h1 class="archive-title">
-			    		Philo<span class="cursive">Sophie</span>
-			    	</h1>
-				<?php } elseif(has_category('Reviews')) { ?>
-					<h1 class="archive-title"><span class="cursive">
-			    		Sophie's</span> Reviews
-			    	</h1>
-				<?php } elseif(has_category('Recipes')) { ?>
-					<h1 class="archive-title">
-			    		<span class="cursive">Sophie's</span> Recipes
-			    	</h1>
-				<?php } 
-			} ?>
-
-		</div>
+	<div class="container">
 
 		<div class="row">
 
@@ -70,7 +17,7 @@
 
 						}
 				 	?>
-					<div class="single-text">
+					<div class="single-content">
 						<h1><?php the_title(); ?></h1>
 					    <?php the_content(); ?>
 					    <?php 
@@ -84,13 +31,17 @@
 				<?php endwhile; endif; ?>
 
 			</div>
+			
+			<div class="col-md-4">
 
-			<?php get_sidebar(); ?>
+				<?php get_sidebar(); ?>
+
+			</div>
 
 		</div>
 
 		<!-- Newsletter CTA -->
-		<?php get_template_part( 'partials/cta/body', 'banner' ); ?>
+		<?php // get_template_part( 'partials/cta/body', 'banner' ); ?>
 
 		<!-- Related -->
 		<?php get_template_part( 'partials/posts/listing', 'related' ); ?>

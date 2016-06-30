@@ -1,12 +1,16 @@
 <!-- Reviews Books and Freebies -->
-<section class="row listing">
+<div class="row">
 	<h2 class="secTitle"><span>Reviews</span></h2>
+</div>
+<section class="row listing">
 	<?php 
 		// List most recent Product Review
+		$featuredPosts = get_cat_ID('Featured');
 		query_posts( array(
 				'post_type' => 'reviews',
 				'posts_per_page' => 4,
-				'order' => 'DESC'
+				'order' => 'DESC',
+				'category__not_in' => $featuredPosts
 			)
 	    );
 		if (have_posts()) : while (have_posts()) : the_post();

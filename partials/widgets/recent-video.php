@@ -42,6 +42,7 @@
 					$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID), 'large' );
 					$videoID = get_post_meta( $post->ID, 'video_link', true );
 				?>
+				<img class="up_logo" src="<?php echo bloginfo('template_directory');?>/assets/images/up_logo.jpg" alt="Unprocessed Productions" />
 				<div class="hidden-xs">
 					<div class="videoWrap">
 						<a href="<?php the_permalink(); ?>">
@@ -56,11 +57,13 @@
 							?>
 						</a>
 					</div>
-					<a href="<?php echo $videos_link; ?>" class="btn btn-custom btn-blue">Watch Videos</a>
+					<p>Interested in shooting your own video? We produce and shoot all of our own videos, and can help you shoot yours.</p>
+					<a href="<?php echo $videos_link; ?>" class="btn">Work With Us</a>
 				</div>
 				<div class="visible-xs">
 					<iframe width="100%" height="225" src="https://www.youtube.com/embed/<?php echo $videoID; ?>?&showinfo=0&controls=0" frameborder="0" allowfullscreen showinfo="false"></iframe>
-					<a href="<?php echo $videos_link; ?>" class="btn btn-custom btn-blue">Watch Videos</a>
+					<p>Interested in shooting your own video? We produce and shoot all of our own videos, and can help you shoot yours.</p>
+					<a href="<?php echo $videos_link; ?>" class="btn">Work With Us</a>
 				</div>
 				<?php endwhile; endif;
 				wp_reset_query();

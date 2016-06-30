@@ -1,0 +1,143 @@
+.widget {
+	background: $white;
+	box-sizing: border-box;
+	padding: 25px;
+	margin-bottom: 30px;
+	position: relative;
+	&.widget_text {
+		padding: 0;
+		background: none;
+	}
+	h3 {
+		text-align: center;
+		margin: 0 auto 15px;
+	}
+	.btn {
+		width: 100%;
+		display: block;
+	}
+	&.cta_widget {
+		padding: 0;
+		#NewsletterWidgetWrap {
+			background: url('assets/images/sidebar-cta.jpg') no-repeat scroll top center / cover $purp;
+			padding: 200px 25px 25px 25px;
+		}
+		h3 {
+			color: $white !important;
+			.cursive {
+				font-size: 36pt;
+			}
+		}
+		.form-group {
+			margin-bottom: 0;
+			label {
+				text-transform: uppercase;
+				font-size: 8pt;
+				letter-spacing: 1px;
+				font-weight: normal;
+				color: $white;
+			}
+			input {
+				line-height: 40px;
+				height: 40px;
+				font-size: 14pt;
+				@include border-top-radius(0);
+				@include border-bottom-radius(0);
+			}
+		}
+		.btn-pink {
+			margin-top: 15px;
+			display: block;
+			width: 100%;
+			&:hover {
+				color: $white;
+			}
+		}
+	}
+	&.photo_widget {
+		.results {
+			.playwrap {
+				@include transform(scale(0.5));
+			}
+			&:hover {
+				.playwrap {
+					background: $mint;
+					@include transform(scale(0.75));
+					@include transition(all, 0.25s, ease-out);
+				}
+			}
+			.photo {
+				display: block;
+				position: relative;
+			}
+		}
+	}
+	&.video_widget {
+		.up_logo {
+			width: 200px;
+			margin: 0 auto 15px;
+		}
+		p {
+			margin: 15px 0;
+			line-height: 21px;
+		}
+		.recent-video {
+			height: 175px;
+			position: relative;
+			.playwrap {
+				@include transform(scale(0.5));
+			}
+		}
+		&:hover {
+			.playwrap {
+				@include transform(scale(0.75));
+				@include transition(all, 0.25s, ease-out);
+			}
+		}
+	}
+	&.giveaway_widget {
+		h3 {
+			margin: 0 0 15px;
+		}
+		.giveaways-listing {
+			padding: 0;
+			width: auto;
+			margin: 0 0 25px;
+			.single-giveaway {
+				height: 300px;
+				position: relative;
+				&:first-child {
+					margin: 0;
+				}
+				h2 {
+					font-size: 18pt;
+					line-height: normal;
+				}
+				.playwrap {
+					@include transform(scale(0.5));
+				}
+				&:hover {
+					.playwrap {
+						background: $mint;
+						@include transform(scale(0.75));
+						@include transition(all, 0.25s, ease-out);
+					}
+				}
+			}
+		}
+	}
+	.ad_placeholder {
+		width: 300px;
+		height: 250px;
+		margin: 0 auto;
+		display: block;
+		background: darken($white, 10%);
+	}
+	.ad_placeholder2 {
+		width: 300px;
+		height: 600px;
+		margin: 0 auto;
+		display: block;
+		background: darken($white, 10%);
+	}
+}

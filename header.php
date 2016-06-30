@@ -114,8 +114,7 @@
 	if(is_home()) {
 		echo '<div class="hidden-xs">';
 			get_template_part( 'partials/cta/header', 'banner' );
-		echo '</div>';
-		echo '<div id="header-pad"></div>'; ?>
+		echo '</div>'; ?>
 		<div id="homeMenu">
 			<?php include (TEMPLATEPATH . '/partials/social.php'); ?>
 			<button type="button" class="btn btn-menu" data-toggle="collapse" data-target="#MenuDropdown" aria-expanded="false" aria-controls="collapseExample">
@@ -123,27 +122,24 @@
 			</button>
 		</div>
 	<?php
-		include (TEMPLATEPATH . '/partials/nav.php');
-	} else { ?>
+	} else { 
+		echo '<div id="header-pad"></div>';
+	?>
 		<header class="sticky">
-			<div class="container-fluid">
+			<div class="container">
 				<div class="row">
-					<div class="col-sm-4 col-xs-8 text-center">
+					<div class="col-sm-12">
 						<a href="<?php echo bloginfo('url');?>"><h1>Megunprocessed</h1></a>
-					</div>
-					<div class="col-sm-6 hidden-xs pull-down text-center">
-						<p class="tagline"><?php echo bloginfo('description'); ?></p>
-					</div>
-					<div class="col-sm-2 col-xs-4">
-						<div id="Navigation">
-							<button type="button" class="btn btn-menu" data-toggle="collapse" data-target="#MenuDropdown" aria-expanded="false" aria-controls="collapseExample">
-								<i class="fa fa-bars"></i> <span class="hidden-xs"></span>
-							</button>
-						</div>
+						<?php include (TEMPLATEPATH . '/partials/social.php'); ?>
+						<div class="wideAd_placeholder visible-lg"></div>
 					</div>
 				</div>
+				<div id="Navigation">
+					<button type="button" class="btn btn-menu" data-toggle="collapse" data-target="#MenuDropdown" aria-expanded="false" aria-controls="collapseExample">
+						<i class="fa fa-bars"></i> <span class="hidden-xs"></span>
+					</button>
+				</div>
 			</div>
-			<?php include (TEMPLATEPATH . '/partials/nav.php'); ?>
 			<div id="customBreadcrumbs" class="hidden-xs">
 				<div class="container">
 					<?php init_breadcrumbs(); ?>
@@ -151,6 +147,7 @@
 			</div>
 		</header>
 	<?php }
+	include (TEMPLATEPATH . '/partials/nav.php');
 ?>
 <span class="visible-xs" id="MobileNewsletter">
 	<div class="outer">
