@@ -12,15 +12,18 @@
 			        $cookHour = get_post_meta( get_the_ID(), 'recipeTime_hours', true );
 			        $cookMinute = get_post_meta( get_the_ID(), 'recipeTime_minutes', true );
 			        $servingSize = get_post_meta( get_the_ID(), 'recipeServing', true );
-        
+        			
 					echo '<div class="single-top clearfix">';
 						the_post_thumbnail();
-						echo '<div>';
-							echo '<div class="col-xs-4 stat"><span>Prep <i class="fa fa-clock-o"></i></span>'.$prepHour.':'.$prepMinute.'</div>';
-			                echo '<div class="col-xs-4 stat"><span>Cook <i class="fa fa-clock-o"></i></span>'.$cookHour.':'.$cookMinute.'</div>';
-			                echo '<div class="col-xs-4 stat"><span>Servings</span>'.$servingSize.'</div>';
-			            echo '</div>';
+						if($prepHour && $prepMinute && $cookHour && $cookMinute && $servingSize) {
+							echo '<div>';
+								echo '<div class="col-xs-4 stat"><span>Prep <i class="fa fa-clock-o"></i></span>'.$prepHour.':'.$prepMinute.'</div>';
+				                echo '<div class="col-xs-4 stat"><span>Cook <i class="fa fa-clock-o"></i></span>'.$cookHour.':'.$cookMinute.'</div>';
+				                echo '<div class="col-xs-4 stat"><span>Servings</span>'.$servingSize.'</div>';
+				            echo '</div>';
+				        }
 					echo '</div>';
+
 					echo '<div class="single-content">';
 						the_title('<h1>','</h1>');
 						the_content();

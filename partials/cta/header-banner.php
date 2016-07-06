@@ -46,7 +46,7 @@ if(!empty($homeBanner)) {
 								</div>
 							</div>
 							<div class="col-md-1">
-								<button class="btn-custom btn-pink btn-submit">
+								<button class="btn btn-submit">
 									Go
 								</button>
 							</div>

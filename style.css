@@ -29,6 +29,20 @@ html, body {
   font-size: 14pt;
   color: #373737; }
 
+body.home footer {
+  margin-top: 0; }
+body.home #filters {
+  margin: 50px 0; }
+  body.home #filters:after {
+    content: "";
+    height: 1px;
+    background: #91daba;
+    width: 100%;
+    display: block;
+    position: relative;
+    top: -30px;
+    z-index: 1; }
+
 p {
   margin: 25px 0; }
 
@@ -98,7 +112,7 @@ h2.secTitle {
   padding-top: 145px; }
 
 .btn {
-  display: inline-block;
+  width: 100%;
   background: #91daba;
   color: #ffffff;
   border-top-left-radius: 0;
@@ -108,10 +122,24 @@ h2.secTitle {
   font-size: 18pt;
   padding: 0 10px;
   line-height: 40px;
+  height: 40px;
+  display: block;
   text-transform: uppercase;
-  letter-spacing: 1px; }
+  letter-spacing: 1px;
+  -webkit-transition: all, 0.25s, ease-out;
+  -moz-transition: all, 0.25s, ease-out;
+  transition: all, 0.25s, ease-out; }
   .btn:focus {
     outline: none; }
+  .btn:hover {
+    color: #ffffff;
+    background: #7ed4ae;
+    -webkit-transition: all, 0.25s, ease-out;
+    -moz-transition: all, 0.25s, ease-out;
+    transition: all, 0.25s, ease-out; }
+  .btn.btn-menu {
+    display: inline-block;
+    width: auto; }
 
 .playwrap {
   background: #463179;
@@ -167,6 +195,8 @@ h2.secTitle {
       #customBreadcrumbs #breadcrumbs li * {
         color: #463179; }
 
+#archive .featured-post {
+  margin-bottom: 50px; }
 #archive .listing {
   margin-bottom: 50px; }
 
@@ -314,15 +344,6 @@ h2.secTitle {
       height: 40px; }
       .header-CTA #newsletter-frm-1 input#emailaddress_1 {
         padding-right: 50px; }
-    .header-CTA #newsletter-frm-1 button {
-      display: block;
-      width: 100%;
-      background: #91daba;
-      border: none;
-      color: #ffffff;
-      line-height: 40px;
-      padding: 0 15px;
-      text-transform: uppercase; }
   .header-CTA #purpleBar {
     background: rgba(70, 29, 141, 0.95); }
     .header-CTA #purpleBar #BarTitle {
@@ -344,16 +365,7 @@ h2.secTitle {
   background: #ffffff; }
 
 #filters {
-  margin: 50px 0; }
-  #filters:after {
-    content: "";
-    height: 1px;
-    background: #91daba;
-    width: 100%;
-    display: block;
-    position: relative;
-    top: -30px;
-    z-index: 1; }
+  margin: 10px 0 50px; }
   #filters .btn-filter {
     display: block;
     width: 100%;
@@ -416,6 +428,7 @@ h2.secTitle {
     display: block; }
 
 footer {
+  margin-top: 50px;
   padding-top: 50px;
   font-size: 12pt;
   border-top: 1px solid #91daba;
@@ -449,9 +462,9 @@ footer {
     line-height: normal;
     color: #463179; }
   footer #SignUp {
-    background: #f2f2f2;
+    border: 1px solid #f2f2f2;
     box-sizing: border-box;
-    padding: 15px; }
+    padding: 25px; }
     footer #SignUp h3 {
       margin: 0 0 15px;
       padding: 0;

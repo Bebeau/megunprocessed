@@ -7,6 +7,26 @@ html, body {
 	font-size: 14pt;
 	color: lighten($black, 15%);
 }
+body {
+	&.home {
+		footer {
+			margin-top: 0;
+		}
+		#filters {
+			margin: 50px 0;
+			&:after {
+				content:"";
+				height: 1px;
+				background: $mint;
+				width: 100%;
+				display: block;
+				position: relative;
+				top: -30px;
+				z-index: 1;
+			}
+		}
+	}
+}
 p {
 	margin: 25px 0;
 }
@@ -82,7 +102,7 @@ h2.secTitle {
 	padding-top: 145px;
 }
 .btn {
-	display: inline-block;
+	width: 100%;
 	background: $mint;
 	color: $white;
 	@include border-top-radius(0);
@@ -90,10 +110,22 @@ h2.secTitle {
 	font-size: 18pt;
 	padding: 0 10px;
 	line-height: 40px;
+	height: 40px;
+	display: block;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+	@include transition(all, 0.25s, ease-out);
 	&:focus {
 		outline: none;
+	}
+	&:hover {
+		color: $white;
+		background: darken($mint, 5%);
+		@include transition(all, 0.25s, ease-out);
+	}
+	&.btn-menu {
+		display: inline-block;
+		width: auto;
 	}
 }
 .playwrap {
@@ -149,6 +181,9 @@ h2.secTitle {
 	}
 }
 #archive {
+	.featured-post {
+		margin-bottom: 50px;
+	}
 	.listing {
 		margin-bottom: 50px;
 	}
@@ -322,16 +357,6 @@ h2.secTitle {
 				padding-right: 50px;
 			}
 		}
-		button {
-			display: block;
-			width: 100%;
-			background: $mint;
-			border: none;
-			color:  $white;
-			line-height: 40px;
-			padding: 0 15px;
-			text-transform: uppercase;
-		}
 	}
 	#purpleBar {
 		background: rgba(70,29,141,0.95);
@@ -360,17 +385,7 @@ h2.secTitle {
 	}
 }
 #filters {
-	margin: 50px 0;
-	&:after {
-		content:"";
-		height: 1px;
-		background: $mint;
-		width: 100%;
-		display: block;
-		position: relative;
-		top: -30px;
-		z-index: 1;
-	}
+	margin: 10px 0 50px;
 	.btn-filter {
 		display: block;
 		width: 100%;
@@ -442,6 +457,7 @@ h2.secTitle {
 	}
 }
 footer {
+	margin-top: 50px;
 	padding-top: 50px;
 	font-size: 12pt;
 	border-top: 1px solid $mint;
@@ -478,9 +494,9 @@ footer {
 		color: $purp;
 	}
 	#SignUp {
-		background: darken($white, 5%);
+		border: 1px solid darken($white, 5%);
 		box-sizing: border-box;
-		padding: 15px;
+		padding: 25px;
 		h3 {
 			margin: 0 0 15px;
 			padding: 0;

@@ -5,12 +5,8 @@
 		<!-- Featured -->
 		<?php get_template_part( 'partials/posts/feature', 'post' ); ?>
 
-	</div>
-
 		<!-- Recipes -->
-		<?php get_template_part( 'partials/posts/post', 'filters' ); ?>
-
-	<div class="container">
+		<?php get_template_part( 'partials/posts/home', 'filters' ); ?>
 
 		<!-- Recipes -->
 		<?php get_template_part( 'partials/posts/listing', 'recipes' ); ?>

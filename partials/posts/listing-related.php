@@ -13,7 +13,7 @@ query_posts( array(
 if (have_posts()) { ?>
 
 	<div class="related-posts">
-		<h3>You Might Also Like...</h3>
+		<h2 class="secTitle"><span>You Might Also Like these</span></h2>
 		<section class="row listing">
 			<?php
 				while (have_posts()) { 
