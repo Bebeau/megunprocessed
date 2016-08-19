@@ -12,7 +12,7 @@ if (!function_exists( 'load_custom_scripts' ) ) {
 		wp_enqueue_style( 'Style CSS', get_bloginfo( 'template_url' ) . '/style.css', false, '', 'all' );
 		// Load default Wordpress jQuery
 		wp_deregister_script('jquery');
-		wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"), false, '', false);
+		wp_register_script('jquery', ("https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"), false, '', false);
 		wp_enqueue_script('jquery');
 		// Load custom scripts
         wp_enqueue_script( 'FontAwesome', 'https://use.fontawesome.com/0af0859db9.js', false, '', 'all' );
@@ -21,7 +21,7 @@ if (!function_exists( 'load_custom_scripts' ) ) {
 
         wp_localize_script( 'custom', 'ajaxbloglisting', array(
             'ajaxurl' => admin_url( 'admin-ajax.php' ),
-            'page' => 4,
+            'page' => 2,
             'loading' => false
         ));
     }
@@ -31,6 +31,17 @@ if (!function_exists( 'load_custom_scripts' ) ) {
 add_action( 'admin_enqueue_scripts', 'load_admin_styles' );
 function load_admin_styles() {
 	wp_enqueue_style( 'admin-styles', get_bloginfo( 'template_url' ) . '/assets/css/admin.css', false, '1.0.0' );
+    wp_enqueue_media();
+    // Registers and enqueues the required javascript.
+    wp_register_script( 'admin-js', get_template_directory_uri() . '/assets/js/admin.js', array( 'jquery' ) );
+    wp_localize_script( 'admin-js', 'meta_image',
+        array(
+            'title' => 'Choose or Upload Image',
+            'button' => 'Select Image',
+            'ajaxurl' => admin_url( 'admin-ajax.php' )
+        )
+    );
+    wp_enqueue_script( 'admin-js' );
 }
 
 // Thumbnail Support
@@ -259,7 +270,6 @@ add_shortcode( 'NewsletterForm', 'signUp_shortcode' );
 include(TEMPLATEPATH.'/partials/widgets/newsletter.php');
 include(TEMPLATEPATH.'/partials/widgets/instaphoto.php');
 include(TEMPLATEPATH.'/partials/widgets/recent-video.php');
-include(TEMPLATEPATH.'/partials/widgets/recent-giveaway.php');
 
 // Breadcrumbs
 function init_breadcrumbs() {
@@ -296,7 +306,7 @@ function init_breadcrumbs() {
             $post_type = get_post_type();
               
             // If it is a custom post type display name and link
-            if($post_type != 'post') {
+            if($post_type !== 'post') {
                   
                 $post_type_object = get_post_type_object($post_type);
                 $post_type_archive = get_post_type_archive_link($post_type);
@@ -561,6 +571,67 @@ function init_pagination() {
 
 }
 
+// ajax response to return posts
+add_action('wp_ajax_ajaxBlog', 'addPosts');
+add_action('wp_ajax_nopriv_ajaxBlog', 'addPosts');
+function addPosts() {
+    global $post;
+
+    $page = (isset($_POST['pageNumber'])) ? $_POST['pageNumber'] : 0;
+    $catID = (isset($_POST['cat'])) ? $_POST['cat'] : 0;
+
+    $args = array(
+        'cat'   => $catID,
+        'posts_per_page' => 12,
+        'paged'          => $page,
+        'post_type' => array("post", "recipes", "reviews")
+    );
+
+    $results = new WP_Query($args);
+
+    $count = 0;
+    $all = wp_count_posts();
+    $total = $all->publish;
+
+    if ($results->have_posts()) :
+
+    echo '<section class="row listing">';
+    
+    while ($results->have_posts()) : $results->the_post();
+        
+        $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID), 'large' ); 
+        $videoID = get_post_meta( $post->ID, 'video_link', true ); ?>
+
+        <div class="col-sm-3 entry">
+            <a href="<?php the_permalink(); ?>">
+            <?php if ($image) { ?>
+                <article class="post-image" style="background: url('<?php echo $image[0]; ?>') no-repeat scroll center / cover;">
+            <?php } else { ?>
+                <article class="post-image default-image" >
+            <?php } ?>
+                </article>
+                <h3><?php the_title(); ?></h3>
+            </a>
+        </div>
+    
+    <?php
+
+    $count++;
+
+    if($count % 4 === 0) {
+        echo '</section><section class="row listing">';
+    } elseif($count === $total) {
+        echo '</section>';
+    }
+
+    endwhile; endif;
+
+    wp_reset_query();
+
+    exit;
+
+}
+
 add_action( 'init', 'allow_origin' );
 function allow_origin() {
     header("Access-Control-Allow-Origin: *");
@@ -573,3 +644,4 @@ function newsletterForm( $atts ) { ?>
 add_shortcode( 'signup', 'newsletterForm' );
 
 include_once('partials/functions/theme-options.php');
+include(TEMPLATEPATH.'/partials/functions/videos.php');

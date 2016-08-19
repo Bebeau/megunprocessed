@@ -7,6 +7,14 @@ html, body {
 	font-size: 14pt;
 	color: lighten($black, 15%);
 }
+body {
+	overflow-x: hidden;
+	&.home {
+		#filters {
+			margin-top: 50px;
+		}
+	}
+}
 p {
 	margin: 25px 0;
 }
@@ -43,6 +51,16 @@ h2.secTitle {
 		z-index: 2;
 		margin-left: 50px;
 		padding: 0 15px;
+	}
+	a {
+		position: relative;
+		z-index: 2;
+		float: right;
+		background: darken($white, 5%);
+		font-size: 14pt;
+		padding: 0 15px;
+		color: $mint;
+		top: 2px;
 	}
 	&:after {
 		content:"";
@@ -108,7 +126,7 @@ h2.secTitle {
 	@include border-left-radius(50%);
 	border: 5px solid #fff;
 	@include transform(scale(0.75));
-	@include transition(all, 0.25s, ease-out);
+	@include transition(all 0.25s ease-out);
 	i {
 		text-align: center;
 		font-size: 48px;
@@ -153,9 +171,29 @@ h2.secTitle {
 		margin-bottom: 50px;
 	}
 }
+.entry {
+	position: relative;
+	top: 50px;
+	opacity: 0;
+	@include transform(scale(0.9));
+	@include transition(all 0.3s $easeInOutBack);
+	&.load {
+		top: 0;
+		opacity: 1;
+		@include transform(scale(1));
+		@include transition(all 0.3s $easeInOutBack);
+	}
+}
+#temp_load {
+	font-size: 24pt;
+	text-align: center;
+	margin: 0 auto 25px;
+	display: block;
+}
 .socialWrap {
 	display: inline-block;
 	vertical-align: middle;
+	margin: 15px 5px 0 0;
 	a {
 		display: inline-block;
 		width: 35px;
@@ -164,6 +202,7 @@ h2.secTitle {
 		@include border-top-radius(50%);
 		@include border-bottom-radius(50%);
 		text-align: center;
+		@include transition(all 0.25s ease-out);
 		i {
 			line-height: 35px;
 			font-size: 16pt;
@@ -203,40 +242,170 @@ h2.secTitle {
 				color: $white;
 			}
 		}
+		&:hover {
+			@include transition(all 0.25s ease-out);
+		}
 	}
 }
-#homeMenu {
+header {
 	position: fixed;
 	top: 15px;
 	right: 15px;
 	z-index: 10;
+	&.sticky {
+		.headerWrap {
+			background: $purp;
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			vertical-align: middle;
+			z-index: 999;
+		}
+		.socialWrap {
+			margin-top: 0;
+		}
+		.btn-menu {
+			position: absolute;
+			right: 15px;
+			top: 15px;
+		}
+		.container-fluid {
+			position: relative;
+			z-index: 10;
+		}
+		h1 {
+			font-family: "Always", sans-serif;
+			color: $white;
+			font-size: 48pt;
+			margin: 10px 0 0;
+			position: relative;
+			bottom: -10px;
+			padding: 0 0 15px;
+			display: inline-block;
+		}
+		.btn {
+			background: transparent;
+			line-height: 95px;
+			&:hover {
+				color: $white;
+			}
+		}
+		#Navigation {
+			position: absolute;
+			right: 15px;
+			top: 0;
+		}
+		.wideAd_placeholder {
+			width: 729px;
+			height: 90px;
+			background: darken($purp, 10%);
+			display: inline-block;
+			vertical-align: middle;
+			float: right;
+			margin-top: 2.5px;
+		}
+	}
+	.socialWrap {
+		position: relative;
+		z-index: 10;
+	}
 	.btn-menu {
+		position: relative;
+		background: $mint;
+		padding: 15px;
+		z-index: 13;
+		display: inline-block;
+		margin: 0 0 0 -4px;
+		overflow: hidden;
+		vertical-align: top;
+		height: 65px;
+		@include transition(all 0.3s $easeInOutBack);
+		.bar {
+			width: 40px;
+			height: 5px;
+			background: $white;
+			display: block;
+			margin: 10px auto;
+			position: relative;
+			left: 0;
+			@include transition(all 0.3s $easeInOutBack);
+			&:first-child {
+				margin-top: 0;
+			}
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+		&:hover {
+			cursor: pointer;
+		}
+		&.slidein {
+			width: 58px;
+			@include transition(all 0.3s $easeInOutBack);
+		}
 		&:active {
 			box-shadow: none !important;
 		}
 	}
-}
-#MenuDropdown {
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: 9;
-	background: $mint;
-	height: 100vh;
-	ul {
-		margin: 0;
-		padding: 0;
-		li {
-			a {
-				color: darken($mint,50%);
-				font-size: 24pt;
+	.menu-home-page-container {
+		position: fixed;
+		top: -100%;
+		left: 0;
+		width: 100%;
+		z-index: 9;
+		background: rgba(145,218,186,0.95);
+		height: 100vh;
+		@include transform(scale(0.93));
+		@include transition(all 0.3s ease-in-out);
+		ul {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			li {
 				display: block;
-				line-height: 60px;
-				&:hover {
-					background: darken($mint, 5%);
+				a {
+					color: darken($mint,50%);
+					font-size: 24pt;
+					display: block;
+					text-align: center;
+					line-height: 60px;
+					@include transition(all 0.25s ease-out);
+					&:hover {
+						background: lighten($mint, 5%);
+						@include transition(all 0.25s ease-in-out);
+					}
 				}
 			}
+		}
+	}
+	&.open {
+		@include transition(all 0.3s $easeInOutBack);
+		.btn-menu {
+			background: $purp;
+			@include transition(all 0.3s ease-in-out);
+			.bar {
+				background: $white;
+				&:first-child {
+					margin-top: 15px;
+					margin-bottom: -16px;
+					@include transform(rotate(-45deg));
+					@include transition(all 0.3s ease-in-out);
+				}
+				&:nth-child(2) {
+					left: 70px;
+					@include transition(all 0.3s ease-in-out);
+				}
+				&:last-child {
+					margin-top: -14px;
+					@include transform(rotate(45deg));
+					@include transition(all 0.3s ease-in-out);
+				}
+			}
+		}
+		.menu-home-page-container {
+			top: 0;
+			@include transition(all 0.3s ease-in-out);
 		}
 	}
 }
@@ -245,49 +414,41 @@ h2.secTitle {
     background: #fff;
     padding: 50px;
     font-size: 14pt;
+    margin-bottom: 25px;
 }
-.sticky {
-	background: $purp;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	vertical-align: middle;
-	z-index: 999;
-	.container-fluid {
-		position: relative;
-		z-index: 10;
-	}
-	h1 {
-		font-family: "Always", sans-serif;
-		color: $white;
-		font-size: 48pt;
-		margin: 10px 0 0;
-		position: relative;
-		bottom: -10px;
-		padding: 0 0 15px;
-		display: inline-block;
-	}
-	.btn {
-		background: transparent;
-		line-height: 95px;
-		&:hover {
-			color: $white;
+#singleRecipe {
+	ul,ol {
+		margin: 0;
+		li {
+			margin: 15px 0;
+			line-height: 24px;
 		}
 	}
-	#Navigation {
-		position: absolute;
-		right: 15px;
-		top: 0;
+	.ingredient-listing {
+    	ul {
+    		li {
+    			font-weight: bold;
+    			margin: 0;
+    			line-height: 28px;
+    		}
+    	}
+    }
+	h3 {
+		color: $purp;
 	}
-	.wideAd_placeholder {
-		width: 729px;
-		height: 90px;
-		background: darken($purp, 10%);
-		display: inline-block;
-		vertical-align: middle;
-		float: right;
-		margin-top: 2.5px;
+	.stat {
+		background: darken($white, 10%) !important;
+		color: $purp !important;
+	}
+	.single-content {
+		h3 {
+			margin: 25px 0 15px;
+		}
+	}
+	.related-posts {
+		.listing {
+			margin: inherit;
+		}
 	}
 }
 .header-CTA {
@@ -318,9 +479,6 @@ h2.secTitle {
 			padding: 0;
 			line-height: 40px;
 			height: 40px;
-			&#emailaddress_1 {
-				padding-right: 50px;
-			}
 		}
 		button {
 			display: block;
@@ -349,8 +507,12 @@ h2.secTitle {
 	}
 }
 .featured-post {
+	margin-bottom: 50px;
 	.featured-image {
 		height: 400px;
+		&.default-image {
+			background: url('assets/images/banner.jpg') no-repeat scroll center / cover;
+		}
 	}
 	.featured-copy {
 		height: 400px;
@@ -358,9 +520,22 @@ h2.secTitle {
 		border: 1px solid darken($white, 10%);
 		background: $white;
 	}
+	&:after {
+		content: "";
+		clear: both;
+		float: none;
+	}
+}
+.category, .archive {
+	.featured-post {
+		height: 400px;
+		margin-bottom: 50px;
+		display: block;
+	}
 }
 #filters {
-	margin: 50px 0;
+	margin: 25px 0;
+	text-align: center;
 	&:after {
 		content:"";
 		height: 1px;
@@ -370,6 +545,11 @@ h2.secTitle {
 		position: relative;
 		top: -30px;
 		z-index: 1;
+	}
+	.dropdown {
+		display: inline-block;
+		width: 300px;
+		margin: 0 25px;
 	}
 	.btn-filter {
 		display: block;
@@ -396,11 +576,24 @@ h2.secTitle {
 			color: darken($mint, 50%);
 		}
 	}
+	.dropdown-menu {
+		width: 100%;
+		max-height: 400px;
+		overflow: scroll;
+		li {
+			a {
+				line-height: 24px;
+			}
+		}
+	}
 }
 .listing {
-	margin: 0 -30px;
+	margin-bottom: 25px;
 	.post-image {
 		height: 250px;
+		&.default-image {
+			background: url('assets/images/banner.jpg') no-repeat scroll center / cover;
+		}
 	}
 	h3 {
 		font-family: "Eurostile", sans-serif;
@@ -428,7 +621,6 @@ h2.secTitle {
 			margin: 25px auto 0;
 			display: block;
 			position: relative;
-			z-index: 10;
 		}
 	}
 	.camera {
@@ -439,6 +631,102 @@ h2.secTitle {
 		height: 90vh;
 		width: 75%;
 		display: block;
+	}
+}
+#contactfrm {
+	margin-top: 25px;
+	label {
+		font-weight: lighter;
+		text-transform: uppercase;
+		font-size: 12pt;
+		font-family: 'helvetica', sans-serif;
+	}
+	input, textarea {
+		@include border-top-radius(0);
+		@include border-bottom-radius(0);
+		font-family: 'helvetica', sans-serif;
+		&:focus {
+			outline: none;
+		}
+	}
+	input {
+		line-height: 50px;
+		height: 40px;
+		font-size: 16pt;
+	}
+	textarea {
+		min-width: 100%;
+		max-width: 100%;
+		width: 100%;
+		min-height: 200px;
+		font-size: 14pt;
+	}
+	button {
+		margin: 35px auto 0;
+		width: 300px;
+		display: block;
+	}
+}
+#Videos {
+	.singlevideo {
+		display: inline-block;
+		width: 50%;
+		box-sizing: border-box;
+		margin: 0 0 0 -4px;
+		height: 235px;
+		position: relative;
+		.playwrap {
+			opacity: 0;
+			@include transform(scale(0.5));
+			@include transition(all 0.3s ease-in-out);
+		}
+		&:hover {
+			cursor: pointer;
+			.playwrap {
+				opacity: 1;
+				@include transform(scale(0.75));
+				@include transition(all 0.3s ease-in-out);
+			}
+		}
+	}
+}
+.modal {
+	text-align: center;
+	@include backface-visibility(hidden);
+	@include transform(translateZ(0));
+	@include transform(translate3d(0,0,0));
+	@include transform-style(preserve-3d);
+	.modal-dialog {
+		display: inline-block;
+		width: auto;
+		max-height: 80vh;
+		max-width: 90vh;
+	}
+	.modal-body {
+		padding: 0;
+		img {
+			max-height: 90vh;
+		}
+		iframe {
+			margin-bottom: -10px;
+		}
+	}
+	i {
+		position: absolute;
+		top: -15px;
+		right: -15px;
+		color: white;
+		background: black;
+		font-size: 24pt;
+		width: 35px;
+		height: 35px;
+		line-height: 35px;
+		text-align: center;
+		@include border-top-radius(50%);
+		@include border-bottom-radius(50%);
+		&:hover {
+			cursor: pointer;
+		}
 	}
 }
 footer {
@@ -508,6 +796,9 @@ footer {
 	#legal {
 		text-align: center;
 		margin: 50px auto 25px;
+		nav {
+			margin-bottom: 25px;
+		}
 		ul {
 			margin: 0;
 			padding: 0;
@@ -523,32 +814,6 @@ footer {
 					}
 				}
 			}
-		}
-	}
-}
-#singleRecipe {
-	h1,h2,h3,h4,h5,h6 {
-		color: $purp;
-	}
-	.stat {
-		background: darken($white, 10%) !important;
-		color: $purp !important;
-	}
-	ul, ol {
-		margin: 0;
-		li {
-			margin: 10px 0;
-			line-height: 24px;
-		}
-	}
-	.single-content {
-		h3 {
-			margin: 25px 0 15px;
-		}
-	}
-	.related-posts {
-		.listing {
-			margin: inherit;
 		}
 	}
 }

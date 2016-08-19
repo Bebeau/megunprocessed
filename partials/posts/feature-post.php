@@ -1,6 +1,8 @@
 <!-- Featured post -->
-<section class="row hidden-xs featured-post">
-	<h2 class="secTitle"><span>Featured</span></h2>
+<section class="hidden-xs featured-post">
+	<?php if(is_front_page()) {
+		echo '<h2 class="secTitle"><span>Featured</span></h2>';
+	} ?>
 	<?php 
 		// List most recent Featured
 		$catID = get_cat_ID('Featured');
@@ -24,7 +26,9 @@
 			<div class="featured-copy col-sm-6 col-md-6">
 				<div class="outer">
 					<div class="inner">
-						<h3><?php the_title(); ?></h3>
+						<a href="<?php echo the_permalink(); ?>">
+							<h3><?php the_title(); ?></h3>
+						</a>
 						<?php the_excerpt(); ?>
 						<a href="<?php echo the_permalink(); ?>">Read Article</a>
 					</div>

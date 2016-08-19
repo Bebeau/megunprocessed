@@ -39,3 +39,74 @@
 
 .track-artwork {
   width: 100px; }
+
+#videos .link {
+  margin: 10px auto; }
+  #videos .link i {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+    z-index: 10; }
+    #videos .link i.youtube {
+      background: url("../images/admin/youtube.svg") no-repeat scroll center #bb0000;
+      background-size: 70% 70%; }
+    #videos .link i.vimeo {
+      background: url("../images/admin/vimeo.svg") no-repeat scroll center #1ab7ea;
+      background-size: 70% 70%; }
+  #videos .link input {
+    line-height: 40px;
+    height: 40px;
+    display: inline-block;
+    margin: 0 auto;
+    font-size: 14pt;
+    width: 100%;
+    padding-left: 45px;
+    padding-right: 105px;
+    margin-left: -40px;
+    vertical-align: top; }
+  #videos .link button {
+    line-height: 40px;
+    height: 40px;
+    width: 100px;
+    display: inline-block;
+    margin: 0 0 0 -100px; }
+#videos li {
+  margin: 0;
+  padding: 0; }
+
+.videoWrap {
+  display: block;
+  margin-top: 10px; }
+  .videoWrap .video {
+    height: 168px;
+    width: 300px;
+    display: inline-block;
+    position: relative;
+    overflow: hidden; }
+    .videoWrap .video:hover {
+      cursor: move; }
+      .videoWrap .video:hover .button-remove {
+        opacity: 1; }
+    .videoWrap .video .button-remove {
+      opacity: 0;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      color: red;
+      font-weight: bold;
+      -webkit-border-radius: 50%;
+      -moz-border-radius: 50%;
+      -o-border-radius: 50%;
+      border-radius: 50%;
+      background: white;
+      border: none;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      -o-box-shadow: none;
+      box-shadow: none; }
+  .videoWrap .ui-state-highlight {
+    width: 300px;
+    height: 168px;
+    display: inline-block; }

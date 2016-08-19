@@ -1,6 +1,6 @@
 <!-- Reviews Books and Freebies -->
 <div class="row">
-	<h2 class="secTitle"><span>Recipes</span></h2>
+	<h2 class="secTitle"><span>Recipes</span><a href="<?php echo site_url('recipes');?>">View All</a></h2>
 </div>
 <section class="row listing">
 	<?php 

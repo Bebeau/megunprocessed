@@ -184,63 +184,38 @@ var move = {
 };
 var init = {
 	onReady: function() {
-		init.ParallaxFade();
-		init.replaceSophieText();
-		init.delayClass();
-		init.navClose();
-		init.VideoModal();
+		init.videoModal();
 		init.FixedHeader();
 		init.NewsletterBtn();
-		init.Dropdown();
 		init.ContactBtn();
-		init.CloseMenuClick();
-		init.NewsletterModal();
-		var url = window.location.href;
-		if(window.location.href.indexOf("category") > -1) {
-			init.BlogAjax();
-		}
+		init.openMenu();
+		init.delayClass();
+		init.BlogAjax();
 	},
-	NewsletterModal: function() {
-		jQuery('#NewsletterModal').on('shown.bs.modal', function () {
-			jQuery('html').on('click', function(e) {
-				jQuery('#NewsletterModal').modal('hide');
-				e.stopPropagation();
-			});
-			jQuery('.modal-dialog').on('click',function(e) {
-				e.stopPropagation();
-			});
-			jQuery('.close-btn').on('click', function(e) {
-				jQuery('#NewsletterModal').modal('hide');
-				e.stopPropagation();
-			});
-		});
-		jQuery('#NewsletterModal').on('hidden.bs.modal', function () {
-			jQuery('html').off('click');
-		});
-		if (Cookies.get('firstVisit') === undefined) {
-			Cookies.set('firstVisit', 'value', { expires: 7 });
-			setTimeout(
-				function() {
-					jQuery('#NewsletterModal').modal('show');
-				}, 3500
-			);
-		}
-		// setTimeout(
-		// 	function() {
-		// 		jQuery('#NewsletterModal').modal('show');
-		// 	}, 3500
-		// );
+	delayClass: function() {
+		jQuery('.entry').each(function(index) {
+           jQuery(this).delay(200*index).queue(function(){
+                jQuery(this).addClass("load");
+            });
+        });
 	},
-	CloseMenuClick: function() {
-		jQuery('#MenuDropdown').on('shown.bs.collapse', function () {
-			jQuery('html').click(function() {
-				jQuery('#MenuDropdown').collapse('hide');
-			});
-			jQuery('#MenuDropdown').click(function(event){
-			    event.stopPropagation();
-			});
-		});
-	},	
+	openMenu: function() {
+		jQuery('.btn-menu').click(function(e){
+			e.preventDefault();
+	    	if(jQuery('header').hasClass("open")) {
+	    		jQuery('header').removeClass("open");
+	    		jQuery('.menu ul li').removeClass("in").dequeue();
+	    	} else {
+	    		jQuery('header').addClass("open");
+	    		jQuery('.menu ul li').each(function(e){
+	    			jQuery(this).delay(50*e).queue(function(){
+	    				jQuery(this).addClass("in");
+	    			});
+	    		});
+	    	}
+	    });
+	    jQuery('.menu-home-page-container').addClass("outer");
+	},
 	FixedHeader: function() {
 		jQuery(window).scroll(function(){
 			var sticky = jQuery('.sticky'),
@@ -253,70 +228,31 @@ var init = {
 		 	}
 		});
 	},
-	ParallaxFade: function() {
-		// Add a simple paralax effect to apply to backgrounds.
-		jQuery('.lax').each(function(){
-			var bgobj = jQuery(this); // assigning the object
-			if(move.isOnScreen(bgobj)) {
-				jQuery(window).scroll(function() {
-				    var yPos = -(jQuery(window).scrollTop() / bgobj.data('speed'));
-				    // Put together our final background position
-				    var coords = '50% '+ yPos + 'px';
-				    // Move the div
-				    bgobj.css({ backgroundPosition: coords });
-				});
-			}
-	    });
-	},
-	onPlayerReady: function(v) {
-		v.target.playVideo();
-	},
-	VideoModal: function(player) {
+	videoModal: function() {
+        // Handling The YouTube Videos play in modals. Basically refreshing the src using this jquery to reload the video
+        jQuery('.singlevideo').click( function(e) {
 
-		jQuery('.video-link').click( function(e) {
+            e.preventDefault();
 
-			e.preventDefault();
+            var videoID = jQuery(this).attr("data-video");
+            var type = jQuery(this).attr("data-type");
 
-			var videoModal = jQuery(this).attr("href");
-			var YouTubeID = jQuery(this).attr("data-videoID");
+            if(type === "youtube") {
+                var yt_URL = 'https://www.youtube.com/embed/'+videoID+'?autoplay=1';
+                jQuery('.modal-body').append('<iframe class="videoFrame" src="'+yt_URL+'" width="853" height="480" frameborder="0" allowfullscreen></iframe>');
+            }
+            if(type === "vimeo") {
+                var vimeo_URL = 'https://player.vimeo.com/video/'+videoID+'?autoplay=1';
+                jQuery('.modal-body').append('<iframe class="videoFrame" src="'+vimeo_URL+'" width="853" height="480" frameborder="0" allowfullscreen></iframe>');
+            }
+            jQuery('#videomodal').modal('show');
 
-			jQuery("#player").attr("src", "http://www.youtube.com/embed/"+ YouTubeID +"?rel=0&autoplay=1");
+            jQuery('#videomodal').on('hidden.bs.modal', function() {
+                jQuery('.videoFrame').remove();
+            });
 
-			jQuery(videoModal).on('hidden.bs.modal', function() {
-		    	jQuery("#player").attr("src", "");
-		    });
-
-		});
-	},
-	delayClass: function() {
-		jQuery('.barwrap').each(function(index){
-			jQuery(this).delay(300*index).queue(function(){
-				jQuery(this).addClass("slideIn").dequeue();
-			});
-		});
-	},
-	navClose: function() {
-		jQuery('#MenuDropdown').on('show.bs.collapse', function () {
-			jQuery('.btn-menu .fa-bars').replaceWith('<i class="fa fa-close"></i>');
-			jQuery('#customBreadcrumbs').slideUp();
-		});
-		jQuery('#MenuDropdown').on('hide.bs.collapse', function () {
-			jQuery('.btn-menu .fa-close').replaceWith('<i class="fa fa-bars"></i>');
-			jQuery('#customBreadcrumbs').slideDown();
-		});
-	},
-	replaceSophieText: function() {
-		if(jQuery('.post-header h1').length) {
-			jQuery('.post-header h1').html(jQuery('.post-header h1').html().replace(/(Sophie)/g,'<span class="cursive">$1</span>'));
-			jQuery('.post-header h1').html(jQuery('.post-header h1').html().replace(/(Sophie's)/g,'<span class="cursive">$1</span>'));
-		}
-		if(jQuery('header .menu-item').length) {
-			jQuery('header .menu-item a').each(function(){
-				jQuery(this).html(jQuery(this).html().replace(/(Sophie's)/g,'<span class="cursive">$1</span>'));
-				jQuery(this).html(jQuery(this).html().replace(/(Sophie)/g,'<span class="cursive">$1</span>'));
-			});
-		}
-	},
+        });
+    },
 	NewsletterSubmit: function() {
 		var numb = jQuery(this).attr("data-form");
 		var Frm = jQuery('#newsletter-frm-'+numb);
@@ -363,13 +299,12 @@ var init = {
 	BlogLoadPosts: function() {
 
         var catID = jQuery('#listing').attr('data-id');
-        
+
         jQuery.ajax({
             url: ajaxbloglisting.ajaxurl,
             type: "post",
             data: {
             	action: 'ajaxBlog',
-            	numPosts : 8, 
             	pageNumber: ajaxbloglisting.page, 
             	cat : catID
             },
@@ -396,7 +331,7 @@ var init = {
                     });
                     // progresively bubble in new posts
                     $data.find('.entry').each(function(index) {
-                       jQuery(this).delay(200*index).queue(function(){
+                       jQuery(this).delay(100*index).queue(function(){
                             jQuery(this).addClass("load");
                         });
                     });
@@ -420,13 +355,6 @@ var init = {
                 init.BlogLoadPosts();
             }
         });
-    },
-    Dropdown: function() {
-    	jQuery('.contact .dropdown-menu li').click(function(){
-    		var interest = jQuery(this).text();
-    		jQuery('#interest').val(interest);
-    		jQuery('.btn-dropdown').replaceWith('<button type="button" class="btn btn-blue btn-block btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">'+interest+' <i class="fa fa-caret-down"></i></button>');
-    	});
     },
     ContactSubmit: function() {
 		var Frm = jQuery('#contactfrm');
@@ -469,11 +397,6 @@ var init = {
 	},
 };
 jQuery(document).ready(function() {
-	// Load YouTube API
-	var tag = document.createElement('script');
-	tag.src = "https://www.youtube.com/iframe_api";
-	var firstScriptTag = document.getElementsByTagName('script')[0];
-	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 	move.onMove();
 	init.onReady();

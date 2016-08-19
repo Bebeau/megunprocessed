@@ -22,7 +22,7 @@ function theme_settings_page() {
 	}
 
 	$appID = esc_attr(get_option('aweber_AppID'));
-	$ontraportKey = esc_attr(get_option('aweber_Key'));
+	$aweberKey = esc_attr(get_option('aweber_Key'));
 
 	$homeBanner = esc_attr(get_option('meg_homeImage'));
 	$Horizontal = esc_attr(get_option('meg_horizontalImage'));

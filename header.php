@@ -59,10 +59,10 @@
 		} ?>">
 		<!-- Twitter Cards -->
 		<meta property="twitter:card" content="summary"> 
-		<meta property="twitter:site" content="@sophieuliano"> 
+		<meta property="twitter:site" content="@megunprocessed"> 
 		<meta property="twitter:title" content="<?php single_post_title(''); ?>"> 
 		<meta property="twitter:description" content="<?php echo strip_tags(get_the_excerpt()); ?>"> 
-		<meta property="twitter:creator" content="@sophieuliano"> 
+		<meta property="twitter:creator" content="@megunprocessed"> 
 		<meta property="twitter:image" content="<?php if (function_exists('wp_get_attachment_thumb_url')) {
 			echo wp_get_attachment_image_url(get_post_thumbnail_id($post->ID), 'medium', false );
 		} ?>">
@@ -73,18 +73,18 @@
 		<meta property="og:site_name" content="<?php bloginfo('name'); ?>" />
 		<meta property="og:description" content="<?php bloginfo('description'); ?>" />
 		<meta property="og:type" content="website" />
-		<meta property="og:image" content="http://sophieuliano.com/wp-content/themes/sophieuliano/assets/images/default_facebook.jpg" />
+		<meta property="og:image" content="http://megunprocessed.com/wp-content/themes/megunprocessed/assets/images/default_facebook.jpg" />
 		<!-- Schema.org -->
 		<meta itemprop="name" content="<?php bloginfo('name'); ?>"> 
 		<meta itemprop="description" content="<?php bloginfo('description'); ?>"> 
-		<meta itemprop="image" content="http://sophieuliano.com/wp-content/themes/sophieuliano/assets/images/default_google.jpg">
+		<meta itemprop="image" content="http://megunprocessed.com/wp-content/themes/megunprocessed/assets/images/default_google.jpg">
 		<!-- Twitter Cards -->
 		<meta property="twitter:card" content="summary"> 
-		<meta property="twitter:site" content="@sophieuliano"> 
+		<meta property="twitter:site" content="@megunprocessed"> 
 		<meta property="twitter:title" content="<?php bloginfo('name'); ?>"> 
 		<meta property="twitter:description" content="<?php bloginfo('description'); ?>"> 
-		<meta property="twitter:creator" content="@sophieuliano"> 
-		<meta property="twitter:image" content="http://sophieuliano.com/wp-content/themes/sophieuliano/assets/images/default_twitter.jpg">
+		<meta property="twitter:creator" content="@megunprocessed"> 
+		<meta property="twitter:image" content="http://megunprocessed.com/wp-content/themes/megunprocessed/assets/images/default_twitter.jpg">
 		<meta property="twitter:url" content="<?php the_permalink() ?>" />
 		<meta property="twitter:domain" content="<?php echo site_url(); ?>">
 	<?php } ?>
@@ -115,44 +115,66 @@
 		echo '<div class="hidden-xs">';
 			get_template_part( 'partials/cta/header', 'banner' );
 		echo '</div>'; ?>
-		<div id="homeMenu">
-			<?php include (TEMPLATEPATH . '/partials/social.php'); ?>
-			<button type="button" class="btn btn-menu" data-toggle="collapse" data-target="#MenuDropdown" aria-expanded="false" aria-controls="collapseExample">
-				<i class="fa fa-bars"></i> <span class="hidden-xs"></span>
-			</button>
-		</div>
+		<header>
+			<div class="headerWrap">
+				<a href="<?php echo site_url();?>"><img src="" alt="" /></a>
+				<?php include (TEMPLATEPATH . '/partials/social.php'); ?>
+				<div class="btn-menu">
+					<span class="bar cross"></span>
+					<span class="bar middle"></span>
+					<span class="bar cross"></span>
+				</div>
+		
 	<?php
 	} else { 
 		echo '<div id="header-pad"></div>';
 	?>
 		<header class="sticky">
-			<div class="container">
-				<div class="row">
-					<div class="col-sm-12">
-						<a href="<?php echo bloginfo('url');?>"><h1>Megunprocessed</h1></a>
-						<?php include (TEMPLATEPATH . '/partials/social.php'); ?>
-						<div class="wideAd_placeholder visible-lg"></div>
+			<div class="headerWrap">
+				<div class="container">
+					<div class="row">
+						<div class="col-sm-12">
+							<a href="<?php echo bloginfo('url');?>"><h1>Megunprocessed</h1></a>
+							<?php include (TEMPLATEPATH . '/partials/social.php'); ?>
+							<div class="wideAd_placeholder visible-lg"></div>
+						</div>
+					</div>
+					<div class="btn-menu">
+						<span class="bar cross"></span>
+						<span class="bar middle"></span>
+						<span class="bar cross"></span>
 					</div>
 				</div>
-				<div id="Navigation">
-					<button type="button" class="btn btn-menu" data-toggle="collapse" data-target="#MenuDropdown" aria-expanded="false" aria-controls="collapseExample">
-						<i class="fa fa-bars"></i> <span class="hidden-xs"></span>
-					</button>
+				<div id="customBreadcrumbs" class="hidden-xs">
+					<div class="container">
+						<?php init_breadcrumbs(); ?>
+					</div>
 				</div>
-			</div>
-			<div id="customBreadcrumbs" class="hidden-xs">
-				<div class="container">
-					<?php init_breadcrumbs(); ?>
-				</div>
-			</div>
-		</header>
+		
 	<?php }
-	include (TEMPLATEPATH . '/partials/nav.php');
+
+	echo '</div>';
+
+	$defaults = array(
+		'theme_location'  => 'primary',
+		'menu'            => 'Primary Menu',
+		'container'       => 'div',
+		'container_class' => '',
+		'container_id'    => '',
+		'menu_class'      => 'menu',
+		'menu_id'         => '',
+		'echo'            => true,
+		'fallback_cb'     => 'wp_page_menu',
+		'before'          => '',
+		'after'           => '',
+		'link_before'     => '',
+		'link_after'      => '',
+		'items_wrap'      => '<ul id="%1$s" class="%2$s inner">%3$s</ul>',
+		'depth'           => 0,
+		'walker'          => ''
+	);
+
+	wp_nav_menu( $defaults );
+
+	echo '</header>';
 ?>
-<span class="visible-xs" id="MobileNewsletter">
-	<div class="outer">
-		<div class="inner">
-			<?php include (TEMPLATEPATH . '/partials/signup.php'); ?>
-		</div>
-	</div>
-</span>

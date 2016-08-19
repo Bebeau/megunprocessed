@@ -1,6 +1,6 @@
 <!-- Reviews Books and Freebies -->
 <div class="row">
-	<h2 class="secTitle"><span>Lifestyle</span></h2>
+	<h2 class="secTitle"><span>Lifestyle</span><a href="<?php echo site_url('category/lifestyle');?>">View All</a></h2>
 </div>
 <section class="row listing">
 	<?php 

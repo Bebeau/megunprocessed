@@ -11,6 +11,7 @@
 	h3 {
 		text-align: center;
 		margin: 0 auto 15px;
+		line-height: 32px;
 	}
 	.btn {
 		width: 100%;
@@ -19,8 +20,8 @@
 	&.cta_widget {
 		padding: 0;
 		#NewsletterWidgetWrap {
-			background: url('assets/images/sidebar-cta.jpg') no-repeat scroll top center / cover $purp;
-			padding: 200px 25px 25px 25px;
+			background: $purp;
+			padding: 25px;
 		}
 		h3 {
 			color: $white !important;
@@ -36,6 +37,8 @@
 				letter-spacing: 1px;
 				font-weight: normal;
 				color: $white;
+				margin: 10px 0 0;
+				line-height: normal;
 			}
 			input {
 				line-height: 40px;
