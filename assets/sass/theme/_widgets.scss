@@ -76,6 +76,11 @@
 		}
 	}
 	&.video_widget {
+		.singlevideo {
+			height: 135px;
+			display: block;
+			position: relative;
+		}
 		.up_logo {
 			width: 200px;
 			margin: 0 auto 15px;
@@ -84,16 +89,15 @@
 			margin: 15px 0;
 			line-height: 21px;
 		}
-		.recent-video {
-			height: 175px;
-			position: relative;
-			.playwrap {
-				@include transform(scale(0.5));
-			}
+		.playwrap {
+			opacity: 1;
+			@include transform(scale(0.45));
+			@include transition(all, 0.25s, ease-out);
 		}
 		&:hover {
 			.playwrap {
-				@include transform(scale(0.75));
+				opacity: 1;
+				@include transform(scale(0.5));
 				@include transition(all, 0.25s, ease-out);
 			}
 		}
@@ -129,13 +133,6 @@
 			}
 		}
 	}
-	.ad_placeholder {
-		width: 300px;
-		height: 250px;
-		margin: 0 auto;
-		display: block;
-		background: darken($white, 10%);
-	}
 	.ad_placeholder2 {
 		width: 300px;
 		height: 600px;
@@ -143,4 +140,11 @@
 		display: block;
 		background: darken($white, 10%);
 	}
+}
+.ad_placeholder {
+	width: 300px;
+	height: 250px;
+	margin: 0 auto;
+	display: block;
+	background: darken($white, 10%);
 }

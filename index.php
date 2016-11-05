@@ -1,25 +1,29 @@
 <?php get_header(); ?>
 
-	<div class="container">
+	<div class="grey">
 
-		<!-- Featured -->
-		<?php get_template_part( 'partials/posts/feature', 'post' ); ?>
+		<div class="container">
 
-	</div>
+			<!-- Featured -->
+			<?php get_template_part( 'partials/posts/feature', 'post' ); ?>
 
-		<!-- Recipes -->
-		<?php get_template_part( 'partials/posts/post', 'filters' ); ?>
+		</div>
 
-	<div class="container">
+			<!-- Recipes -->
+			<?php get_template_part( 'partials/posts/post', 'filters' ); ?>
 
-		<!-- Recipes -->
-		<?php get_template_part( 'partials/posts/listing', 'recipes' ); ?>
+		<div class="container">
 
-		<!-- Lifestyle posts -->
-		<?php get_template_part( 'partials/posts/listing', 'lifestyle' ); ?>
+			<!-- Recipes -->
+			<?php get_template_part( 'partials/posts/listing', 'recipes' ); ?>
 
-		<!-- Reviews -->
-		<?php get_template_part( 'partials/posts/listing', 'reviews' ); ?>
+			<!-- Lifestyle posts -->
+			<?php get_template_part( 'partials/posts/listing', 'lifestyle' ); ?>
+
+			<!-- Reviews -->
+			<?php get_template_part( 'partials/posts/listing', 'reviews' ); ?>
+
+		</div>
 
 	</div>
 

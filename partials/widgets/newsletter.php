@@ -40,7 +40,7 @@
 				}
 
 			?>
-				<form role="form" method="POST" id="newsletter-frm-3" data-form="3" action="<?php echo bloginfo('template_directory');?>/partials/forms/newsletter.php" />
+				<form role="form" method="POST" id="newsletterfrm" data-form="newsletter" action="" />
 					<div class="row">
 						<div class="form-group col-md-6">
 							<label for="firstname_3" class="control-label">First Name <span class="required">*</span></label>

@@ -45,10 +45,10 @@ function load_admin_styles() {
 }
 
 // Thumbnail Support
-add_theme_support( 'post-thumbnails', array('post', 'page', 'reviews', 'recipes', 'giveaways', 'splash') );
+add_theme_support( 'post-thumbnails', array('post', 'page', 'reviews', 'recipes', 'giveaways', 'testimonials', 'products') );
 
 // Load widget areas
-function sophie_sidebar_init() {
+function megan_sidebar_init() {
     register_sidebar(array(
         'name' => 'Main Sidebar',
         'id' => 'main_sidebar',
@@ -59,7 +59,7 @@ function sophie_sidebar_init() {
         'after_title' => '</h3>',
     ));
 }
-add_action( 'widgets_init', 'sophie_sidebar_init' );
+add_action( 'widgets_init', 'megan_sidebar_init' );
 
 // Register Navigation Menu Areas
 add_action( 'after_setup_theme', 'register_my_menu' );
@@ -67,12 +67,6 @@ function register_my_menu() {
   register_nav_menu( 'primary', 'Primary Menu' );
   register_nav_menu( 'footer', 'Footer Menu' );
 }
-
-// Custom excerpt length
-function custom_excerpt_length( $length ) {
-    return 25;
-}
-add_filter( 'excerpt_length', 'custom_excerpt_length', 999 );
 
 // Create social bookmark input fields in general settings
 add_action('admin_init', 'my_general_section');  
@@ -150,11 +144,9 @@ function my_general_section() {
     register_setting('general','googleplus', 'esc_attr');
     register_setting('general','youtube', 'esc_attr');
 }
-
 function my_section_options_callback() { // Section Callback
     echo '<p>Enter your social media links to have them automatically display in the website footer.</p>';  
 }
-
 function my_textbox_callback($args) {  // Textbox Callback
     $option = get_option($args[0]);
     echo '<input type="text" class="regular-text" id="'. $args[0] .'" name="'. $args[0] .'" value="' . $option . '" />';
@@ -190,6 +182,7 @@ function youtube_video_link() {
 <?php 
 }
 // save video link
+add_action( 'save_post', 'youtube_video_link_save' );
 function youtube_video_link_save( $post_id ) {
     // Checks save status
     $is_autosave = wp_is_post_autosave( $post_id );
@@ -210,8 +203,7 @@ function youtube_video_link_save( $post_id ) {
         update_post_meta( $post_id, 'video_link', $videoID );
     }
 }
-add_action( 'save_post', 'youtube_video_link_save' );
-
+// add javascript to remove youtube link
 add_action( 'admin_footer', 'removeYoutTubeURL_javascript' );
 function removeYoutTubeURL_javascript() { 
     global $post;
@@ -251,25 +243,6 @@ function VideoRemove() {
     $postID = (isset($_GET['postID'])) ? $_GET['postID'] : 0;
     update_post_meta( $postID, 'video_link', '' );
 }
-add_shortcode( 'book', 'displayBook_shortcode' );
-
-function signUp_shortcode() {
-    /* Turn on buffering */
-    ob_start();
-    include dirname( __FILE__ ) . '/partials/shortcode/signup.php';
-    /* Get the buffered content into a var */
-    $form = ob_get_contents();
-    /* Clean buffer */
-    ob_end_clean();
-
-    return $form;
-
-}
-add_shortcode( 'NewsletterForm', 'signUp_shortcode' );
-
-include(TEMPLATEPATH.'/partials/widgets/newsletter.php');
-include(TEMPLATEPATH.'/partials/widgets/instaphoto.php');
-include(TEMPLATEPATH.'/partials/widgets/recent-video.php');
 
 // Breadcrumbs
 function init_breadcrumbs() {
@@ -637,11 +610,148 @@ function allow_origin() {
     header("Access-Control-Allow-Origin: *");
 }
 
-function newsletterForm( $atts ) { ?>
-        
+add_action('wp_ajax_sendContact', 'emailSubmit');
+add_action('wp_ajax_nopriv_sendContact', 'emailSubmit');
+function emailSubmit() {
+    global $post;
+    if( empty($_POST['password']) ) {
 
-<?php }
-add_shortcode( 'signup', 'newsletterForm' );
+        $success = false;
 
-include_once('partials/functions/theme-options.php');
+        $firstname = isset( $_POST['firstname'] ) ? $_POST['firstname'] : "";
+        $lastname = isset( $_POST['lastname'] ) ? $_POST['lastname'] : "";
+        $emailaddress = filter_var($_POST['emailaddress'], FILTER_SANITIZE_EMAIL);
+        $message = isset( $_POST['message'] ) ? $_POST['message'] : "";
+
+        $email = esc_attr(get_option('admin_email'));
+        $to = $firstname.' '.$lastname.' <'.$emailaddress.'>';
+
+        if ( $firstname && $lastname && $emailaddress && $message ) {
+
+            $subject = "Megunprocessed Website Lead";
+
+            $headers = 'From:' . $email . "\r\n";
+            $headers .= 'Reply-To:' . $to . "\r\n";
+            $headers .= "MIME-Version: 1.0\r\n";
+            $headers .= "Content-Type: text/html\r\n";
+            $headers .= "charset: ISO-8859-1\r\n";
+            $headers .= "X-Mailer: PHP/".phpversion()."\r\n";
+
+            $formcontent = '<html><body><center>';
+                $formcontent .= '<table rules="all" style="border: 1px solid #cccccc; width: 600px;" cellpadding="10">';
+                $formcontent .= "<tr><td><strong>Name:</strong></td><td>" . $firstname .' '. $lastname . "</td></tr>";
+                $formcontent .= "<tr><td><strong>Email:</strong></td><td>" . $emailaddress . "</td></tr>";
+                $formcontent .= "<tr><td><strong>Message:</strong></td><td>" . $message . "</td></tr>";
+            $formcontent .= '</table></center></body></html>';
+
+            $success = mail( $email, $subject, $formcontent, $headers );
+
+            $key = esc_attr(get_option('mailchimp_api'));
+            $list = esc_attr(get_option('mailchimp_list'));
+
+            if(!empty($key) && !empty($list)) {
+
+                $auth = base64_encode( 'user:'.$key );
+
+                $data = array(
+                    'apikey'        => $key,
+                    'email_address' => $emailaddress,
+                    'status'        => 'subscribed',
+                    'merge_fields'  => array(
+                        'FNAME'     => $firstname,
+                        'LNAME'     => $lastname,
+                        'COMPANY'   => $company,
+                        'TITLE'     => $title,
+                        'INTEREST'  => $interest
+                    )
+                );
+
+                $json_data = json_encode($data);
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'https://us11.api.mailchimp.com/3.0/lists/'.$list.'/members/');
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+                                                            'Authorization: Basic '.$auth));
+                curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);                                                                                                                  
+
+                $result = curl_exec($ch);
+            }
+        }
+
+        // Return an appropriate response to the browser
+        if ( defined( 'DOING_AJAX' ) ) {
+            echo $success ? "Success" : "E";
+        }
+    }
+    die();
+
+}
+add_action('wp_ajax_sendNewsletter', 'newsletterSubmit');
+add_action('wp_ajax_nopriv_sendNewsletter', 'newsletterSubmit');
+function newsletterSubmit() {
+    global $post;
+    if( empty($_POST['password']) ) {
+
+        $success = false;
+
+        $firstname = isset( $_POST['firstname'] ) ? $_POST['firstname'] : "";
+        $lastname = isset( $_POST['lastname'] ) ? $_POST['lastname'] : "";
+        $emailaddress = filter_var($_POST['emailaddress'], FILTER_SANITIZE_EMAIL);
+
+        if ( $firstname && $lastname && $emailaddress ) {
+
+            $key = esc_attr(get_option('mailchimp_api'));
+            $list = esc_attr(get_option('mailchimp_list'));
+
+            if(!empty($key) && !empty($list)) {
+
+                $auth = base64_encode( 'user:'.$key );
+
+                $data = array(
+                    'apikey'        => $key,
+                    'email_address' => $emailaddress,
+                    'status'        => 'subscribed',
+                    'merge_fields'  => array(
+                        'FNAME'     => $firstname,
+                        'LNAME'     => $lastname
+                    )
+                );
+
+                $json_data = json_encode($data);
+
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, 'https://us11.api.mailchimp.com/3.0/lists/'.$list.'/members/');
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json',
+                                                            'Authorization: Basic '.$auth));
+                curl_setopt($ch, CURLOPT_USERAGENT, 'PHP-MCAPI/2.0');
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);                                                                                                                  
+
+                $result = curl_exec($ch);
+            }
+        }
+
+        // Return an appropriate response to the browser
+        if ( defined( 'DOING_AJAX' ) ) {
+            echo $success ? "Success" : "E";
+        }
+    }
+    die();
+
+}
+
+include(TEMPLATEPATH.'/partials/widgets/newsletter.php');
+include(TEMPLATEPATH.'/partials/widgets/instaphoto.php');
+include(TEMPLATEPATH.'/partials/widgets/recent-video.php');
+include(TEMPLATEPATH.'/partials/widgets/testimonials.php');
+include(TEMPLATEPATH.'/partials/functions/theme-options.php');
 include(TEMPLATEPATH.'/partials/functions/videos.php');
+include(TEMPLATEPATH.'/partials/functions/products.php');

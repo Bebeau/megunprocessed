@@ -91,10 +91,7 @@
 
 	<!-- WP Generated Header
 	================================================== --> 
-	<?php wp_head(); 
-		$videoID = "";
-
-	?>
+	<?php wp_head(); ?>
     
 </head>
 
@@ -112,12 +109,10 @@
 
 <?php 
 	if(is_home()) {
-		echo '<div class="hidden-xs">';
-			get_template_part( 'partials/cta/header', 'banner' );
-		echo '</div>'; ?>
+		get_template_part( 'partials/cta/header', 'banner' ); ?>
 		<header>
 			<div class="headerWrap">
-				<a href="<?php echo site_url();?>"><img src="" alt="" /></a>
+				<a href="<?php echo site_url();?>" class="mobile"><h1>Megunprocessed</h1></a>
 				<?php include (TEMPLATEPATH . '/partials/social.php'); ?>
 				<div class="btn-menu">
 					<span class="bar cross"></span>

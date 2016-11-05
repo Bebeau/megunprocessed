@@ -18,7 +18,7 @@ get_header(); ?>
 
 					<?php the_content(); ?>
 
-					<form role="form" method="POST" action="<?php echo bloginfo('template_directory');?>/partials/forms/contact.php" id="contactfrm">
+					<form role="form" method="POST" action="" id="contactfrm" data-form="contact">
 						<div class="row">
 							<div class="form-group col-sm-6">
 								<label for="firstname" class="control-label">First Name <span class="required">*</span></label>

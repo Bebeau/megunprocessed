@@ -2,7 +2,12 @@
 /*
 Template Name: Search Page
 */
-get_header(); ?>
+get_header(); 
+
+$page = get_page_by_title('Unprocessed Productions');
+$videos_link = get_permalink($page->ID);
+
+?>
 
 	<div class="container" id="listing">
 

@@ -26,49 +26,55 @@
 				global $post;
 
 				echo $args['before_widget']; 
+
+				echo '<img class="up_logo" src="'.get_bloginfo('template_directory').'/assets/images/up_logo.jpg" alt="Unprocessed Productions" />';
 				
 				// List most recent Videos
-				$Videos = get_cat_ID('Videos');
-				$videos_link = get_category_link( $Videos );
-				query_posts( array(
-						'cat' => $Videos,
-						'posts_per_page' => 1,
-						'order' => 'DESC',
-						'post_type' => array('post', 'recipes', 'reviews'),
-						'post__not_in' => array($post->ID)
-					)
-			    );
-				if (have_posts()) : while (have_posts()) : the_post(); 
-					$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID), 'large' );
-					$videoID = get_post_meta( $post->ID, 'video_link', true );
-				?>
-				<img class="up_logo" src="<?php echo bloginfo('template_directory');?>/assets/images/up_logo.jpg" alt="Unprocessed Productions" />
-				<div class="hidden-xs">
-					<div class="videoWrap">
-						<a href="<?php the_permalink(); ?>">
-							<?php
-								if ($image) {
-									echo '<article class="recent-video" style="background: url('.$image[0].') no-repeat scroll center / cover; ">';
-								} else {
-									echo '<article class="recent-video" style="background: url(http://img.youtube.com/vi/'.$videoID.'/sddefault.jpg) no-repeat scroll center / cover; ">';
-								} 
-								echo '<div class="playwrap"><i class="fa fa-play"></i></div>';
-								echo '</article>'; 
-							?>
-						</a>
-					</div>
-					<p>Interested in shooting your own video? We produce and shoot all of our own videos, and can help you shoot yours.</p>
-					<a href="<?php echo $videos_link; ?>" class="btn">Work With Us</a>
-				</div>
-				<div class="visible-xs">
-					<iframe width="100%" height="225" src="https://www.youtube.com/embed/<?php echo $videoID; ?>?&showinfo=0&controls=0" frameborder="0" allowfullscreen showinfo="false"></iframe>
-					<p>Interested in shooting your own video? We produce and shoot all of our own videos, and can help you shoot yours.</p>
-					<a href="<?php echo $videos_link; ?>" class="btn">Work With Us</a>
-				</div>
-				<?php endwhile; endif;
-				wp_reset_query();
+				$videos = get_post_meta(2075,'videos',true);
 
-			echo $args['after_widget']; 
+                if(!empty($videos)) {
+                	$count = count($videos) - 1;
+					$pick = rand(0, $count);
+                	$videoID = $videos[$pick]['id'];
+                	$videoType = $videos[$pick]['type'];
+
+                	if(wp_is_mobile()) {
+                                            
+                        if($videoType === "youtube") {
+                            echo '<iframe src="https://www.youtube.com/embed/'.$videoID.'" class="m-item videoFrame" width="100%" frameborder="0" allowfullscreen></iframe>';
+                        } elseif($videoType === 'vimeo') {
+                            echo '<iframe src="https://player.vimeo.com/video/'.$videoID.'" class="m-item videoFrame" width="100%" frameborder="0" allowfullscreen></iframe>';
+                        }
+
+                    } else {
+
+                        if($videoType === "youtube") {
+                            echo '<a href="#videomodal" data-toggle="modal" class="singlevideo video" data-type="youtube" data-video="'.$videoID.'" style="background:url(https://i1.ytimg.com/vi/'.$videoID.'/hqdefault.jpg) no-repeat scroll center / cover;">';
+                                echo '<div class="playwrap"><i class="fa fa-play"></i></div>';
+                                echo '<div class="outer"><div class="inner"></div></div>';
+                            echo '</a>';
+                        } elseif($videoType === 'vimeo') {
+                            $imgid = $videoID;
+                            $hash = unserialize(file_get_contents("http://vimeo.com/api/v2/video/$imgid.php"));
+                            $thumb = $hash[0]['thumbnail_large'];
+                            echo '<a href="#videomodal" data-toggle="modal" class="singlevideo video" data-type="vimeo" data-video="'.$videoID.'" style="background:url('.$thumb.') no-repeat scroll center / cover;" data-ibg-bg="'.$thumb.'">';
+                                echo '<div class="playwrap"><i class="fa fa-play"></i></div>';
+                                echo '<div class="outer"><div class="inner"></div></div>';
+                            echo '</a>';
+                        }
+
+                    }
+                }
+				
+				$page = get_page_by_title('Unprocessed Productions');
+				$videos_link = get_permalink($page->ID);
+				?>
+				<div class="hidden-xs">
+					<p>Interested in shooting your own video? We produce and shoot all of our own videos, and can help you shoot yours.</p>
+					<a href="<?php echo $videos_link; ?>" class="btn">Work With Us</a>
+				</div>
+
+			<?php echo $args['after_widget']; 
 		}
 
 		/**

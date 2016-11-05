@@ -8,6 +8,12 @@ html, body {
 	color: lighten($black, 15%);
 }
 body {
+	text-rendering: optimizeLegibility !important;
+	-webkit-font-smoothing: antialiased !important;
+	-moz-font-smoothing: antialiased !important;
+	-o-font-smoothing: antialiased !important;
+	font-smoothing: antialiased !important;
+	text-shadow: 1px 1px 1px rgba(0,0,0,0.04);
 	overflow-x: hidden;
 	&.home {
 		#filters {
@@ -42,7 +48,7 @@ input, textarea, button, a {
 }
 h2.secTitle {
 	color: $purp;
-	font-size: 18pt;
+	font-size: 24pt;
 	margin: 25px 0;
 	span {
 		display: inline-block;
@@ -60,11 +66,11 @@ h2.secTitle {
 		font-size: 14pt;
 		padding: 0 15px;
 		color: $mint;
-		top: 2px;
+		@include transform(translate(0,50%));
 	}
 	&:after {
 		content:"";
-		height: 1px;
+		height: 1.5px;
 		background: $mint;
 		width: 100%;
 		display: block;
@@ -96,8 +102,11 @@ h2.secTitle {
 		width: 100%;
 	}
 }
+.mobile {
+	display: none;
+}
 #header-pad {
-	padding-top: 145px;
+	padding-top: 135px;
 }
 .btn {
 	display: inline-block;
@@ -106,12 +115,18 @@ h2.secTitle {
 	@include border-top-radius(0);
 	@include border-bottom-radius(0);
 	font-size: 18pt;
-	padding: 0 10px;
+	padding: 5px 10px 0;
 	line-height: 40px;
 	text-transform: uppercase;
 	letter-spacing: 1px;
+	@include transition(all 0.25s $authenticMotion);
 	&:focus {
 		outline: none;
+	}
+	&:hover {
+		color: $white;
+		background: darken($mint, 10%);
+		@include transition(all 0.25s $authenticMotion);
 	}
 }
 .playwrap {
@@ -126,7 +141,7 @@ h2.secTitle {
 	@include border-left-radius(50%);
 	border: 5px solid #fff;
 	@include transform(scale(0.75));
-	@include transition(all 0.25s ease-out);
+	@include transition(all 0.25s $authenticMotion);
 	i {
 		text-align: center;
 		font-size: 48px;
@@ -173,15 +188,13 @@ h2.secTitle {
 }
 .entry {
 	position: relative;
-	top: 50px;
 	opacity: 0;
-	@include transform(scale(0.9));
-	@include transition(all 0.3s $easeInOutBack);
+	@include transform(translate(0,50px)scale(0.9));
+	@include transition(all 0.5s $authenticMotion);
 	&.load {
-		top: 0;
 		opacity: 1;
-		@include transform(scale(1));
-		@include transition(all 0.3s $easeInOutBack);
+		@include transform(translate(0,0)scale(1));
+		@include transition(all 0.5s $authenticMotion);
 	}
 }
 #temp_load {
@@ -190,22 +203,27 @@ h2.secTitle {
 	margin: 0 auto 25px;
 	display: block;
 }
+.grey {
+	background: darken($white, 5%);
+	position: relative;
+	z-index: 2;
+}
 .socialWrap {
 	display: inline-block;
 	vertical-align: middle;
 	margin: 15px 5px 0 0;
 	a {
 		display: inline-block;
-		width: 35px;
-		height: 35px;
+		width: 30px;
+		height: 30px;
 		background: $white;
 		@include border-top-radius(50%);
 		@include border-bottom-radius(50%);
 		text-align: center;
 		@include transition(all 0.25s ease-out);
 		i {
-			line-height: 35px;
-			font-size: 16pt;
+			line-height: 30px;
+			font-size: 14pt;
 		}
 		&.facebook {
 			color: $facebook;
@@ -269,6 +287,7 @@ header {
 			position: absolute;
 			right: 15px;
 			top: 15px;
+			background: $purp;
 		}
 		.container-fluid {
 			position: relative;
@@ -313,10 +332,10 @@ header {
 	.btn-menu {
 		position: relative;
 		background: $mint;
+		box-sizing: border-box;
 		padding: 15px;
 		z-index: 13;
 		display: inline-block;
-		margin: 0 0 0 -4px;
 		overflow: hidden;
 		vertical-align: top;
 		height: 65px;
@@ -350,13 +369,12 @@ header {
 	}
 	.menu-home-page-container {
 		position: fixed;
-		top: -100%;
 		left: 0;
 		width: 100%;
 		z-index: 9;
 		background: rgba(145,218,186,0.95);
 		height: 100vh;
-		@include transform(scale(0.93));
+		@include transform(translate(0,-150%));
 		@include transition(all 0.3s ease-in-out);
 		ul {
 			margin: 0;
@@ -370,6 +388,7 @@ header {
 					display: block;
 					text-align: center;
 					line-height: 60px;
+					padding-top: 5px;
 					@include transition(all 0.25s ease-out);
 					&:hover {
 						background: lighten($mint, 5%);
@@ -382,13 +401,13 @@ header {
 	&.open {
 		@include transition(all 0.3s $easeInOutBack);
 		.btn-menu {
-			background: $purp;
+			background: none;
 			@include transition(all 0.3s ease-in-out);
 			.bar {
 				background: $white;
 				&:first-child {
 					margin-top: 15px;
-					margin-bottom: -16px;
+					margin-bottom: -14px;
 					@include transform(rotate(-45deg));
 					@include transition(all 0.3s ease-in-out);
 				}
@@ -404,7 +423,7 @@ header {
 			}
 		}
 		.menu-home-page-container {
-			top: 0;
+			@include transform(translate(0,-81px));
 			@include transition(all 0.3s ease-in-out);
 		}
 	}
@@ -415,6 +434,15 @@ header {
     padding: 50px;
     font-size: 14pt;
     margin-bottom: 25px;
+}
+.related-posts {
+	margin-bottom: 50px;
+	h2 {
+		margin-top: 0;
+	}
+	.listing {
+		margin: inherit;
+	}
 }
 #singleRecipe {
 	ul,ol {
@@ -445,15 +473,42 @@ header {
 			margin: 25px 0 15px;
 		}
 	}
-	.related-posts {
-		.listing {
-			margin: inherit;
+}
+#singleReview {
+	iframe {
+		width: 100%;
+	}
+	#ReviewRanking {
+		text-align: center;
+		margin: 0;
+		padding: 0;
+		background: darken($white, 10%);
+		li {
+			width: 35px;
+			display: inline-block;
+			line-height: 60px;
+			&:hover {
+				cursor: pointer;
+			}
+			svg {
+				vertical-align: middle;
+				*{
+					fill: #999999;
+				}
+			}
+			&.hover, &.active {
+				svg {
+					*{
+						fill: #c4a300;
+					}
+				}
+			}
 		}
 	}
 }
 .header-CTA {
 	height: 100vh;
-	#newsletter-frm-1 {
+	#newsletterfrm {
 		background: $white;
 		box-sizing: border-box;
 		position: relative;
@@ -462,7 +517,6 @@ header {
 			color: $purp;
 			text-transform: uppercase;
 			font-family: "LemonMilk", sans-serif;
-			font-weight: bold;
 			letter-spacing: 1px;
 			margin: 0;
 			padding: 0;
@@ -480,15 +534,8 @@ header {
 			line-height: 40px;
 			height: 40px;
 		}
-		button {
-			display: block;
+		.btn {
 			width: 100%;
-			background: $mint;
-			border: none;
-			color:  $white;
-			line-height: 40px;
-			padding: 0 15px;
-			text-transform: uppercase;
 		}
 	}
 	#purpleBar {
@@ -667,26 +714,279 @@ header {
 		display: block;
 	}
 }
-#Videos {
+iframe {
+	margin-bottom: -5px;
+	width: 853px;
+	height: 480px;
+}
+.videoCarousel {
+	margin: 0 -15px;
+	padding: 100px 0;
+	.upLogo {
+		width: 400px;
+		height: auto;
+	}
+	.upDesc {
+		text-align: center;
+		width: 600px;
+		margin: 25px auto 0;
+		font-size: 18pt;
+		line-height: normal;
+		color: gray;
+	}
+	h2 {
+		margin: 0 0 50px;
+		text-align: center;
+		span {
+			margin: 0;
+		}
+	}
+	.btn {
+		display: block;
+		width: 400px;
+		margin: 50px auto 0;
+	}
 	.singlevideo {
-		display: inline-block;
-		width: 50%;
-		box-sizing: border-box;
-		margin: 0 0 0 -4px;
-		height: 235px;
 		position: relative;
+		width: 853px;
+		height: 480px;
+		display: inline-block;
+		box-sizing: border-box;
+		position: relative;
+		box-shadow: 0px 0px 100px 25px rgba(0,0,0,0.5) inset;
+		opacity: 0.5;
+		@include transform(scale(1) translate(0,0));
+		@include transition(all 0.5s $authenticMotion);
+		pointer-events: none;
+		&:hover {
+			cursor: default;
+		}
+		&.m-active {
+			opacity: 1;
+			pointer-events: inherit;
+			&:hover {
+				cursor: pointer;
+				.playwrap {
+					opacity: 1;
+					@include transform(scale(0.75));
+					@include transition(all 0.3s $authenticMotion);
+				}
+			}
+		}
 		.playwrap {
 			opacity: 0;
 			@include transform(scale(0.5));
-			@include transition(all 0.3s ease-in-out);
+			@include transition(all 0.3s $authenticMotion);
 		}
-		&:hover {
-			cursor: pointer;
-			.playwrap {
-				opacity: 1;
-				@include transform(scale(0.75));
-				@include transition(all 0.3s ease-in-out);
+	}
+}
+#Videos {
+	.videoWrap {
+		position: relative;
+		height: 100vh;
+		box-sizing: border-box;
+		.videoCopy {
+			background: #fff;
+			height: 100%;
+			width: 40%;
+			box-sizing: border-box;
+			padding: 50px;
+			display: inline-block;
+			h2 {
+				font-family: "Eurostile", sans-serif;
+				font-size: 24pt;
+				font-weight: normal;
+				color: lighten(black, 50%);
+				margin-top: 50px;
 			}
+			img {
+				width: 400px;
+				height: auto;
+			}
+			.btn {
+				width: 400px;
+				margin: 50px auto 0;
+				display: block;
+			}
+		}
+		.videoImage {
+			display: inline-block;
+			width: 60%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			overflow: hidden;
+			float: right;
+			background: url('assets/images/cameraman.jpg') no-repeat scroll top left / cover;
+		}
+	}
+	.videoTestimonials {
+		background: white;
+		padding: 100px 0;
+		h2 {
+			text-align: center;
+			margin-bottom: 50px;
+			span {
+				background: white;
+				margin: 0;
+			}
+		}
+		.wrap {
+			width: 800px;
+			margin: 0 auto;
+			box-sizing: border-box;
+			cite {
+				width: 40%;
+				display: inline-block;
+				img {
+					@include border-top-radius(50%);
+					@include border-bottom-radius(50%);
+					margin-bottom: 15px;
+				}
+				span {
+					display: block;
+					font-size: 16pt;
+					&.title {
+						font-size: 12pt;
+					}
+				}
+			}
+			blockquote {
+				width: 60%;
+				min-height: 350px;
+				margin: 0;
+				padding: 0 0 0 25px;
+				border: none;
+				display: inline-block;
+				box-sizing: border-box;
+				text-align: left;
+				line-height: normal;
+				font-size: 14pt;
+				font-weight: lighter;
+				p {
+					margin: 10px 0 0;
+				}
+			}
+		}
+	}
+	.videoServices {
+		height: 100vh;
+		background: url('assets/images/services_bg.jpg') no-repeat scroll top left / cover;
+		color: white;
+		h2 {
+			text-align: center;
+			position: relative;
+			margin-bottom: 100px;
+			&:after {
+				width: 40%;
+				background: white;
+				position: absolute;
+				left: 0;
+				top: 50%;
+				opacity: 0.25;
+			}
+			&:before {
+				content: "";
+				display: block;
+				width: 40%;
+				background: white;
+				height: 1px;
+				position: absolute;
+				right: 0;
+				top: 50%;
+				opacity: 0.25;
+			}
+			span {
+				width: 200px;
+				margin: 0 auto;
+				display: block;
+				text-align: center;
+				background: none;
+				color: white;
+			}
+		}
+		.service {
+			p {
+				box-sizing: border-box;
+				padding: 0 35px;
+				line-height: normal;
+			}
+			h3 {
+				color: white;
+			}
+		}
+	}
+	.videoConsultation {
+		height: 100vh;
+		h2 {
+			text-align: center;
+			margin-bottom: 50px;
+			span {
+				margin: 0;
+			}
+		}
+		#consultationfrm {
+			label {
+				font-weight: lighter;
+				text-transform: uppercase;
+				color: $purp;
+				font-size: 10pt;
+				letter-spacing: 1px;
+			}
+			input {
+				line-height: 60px;
+				height: 60px;
+				border: 1px solid darken(white,10%);
+				@include border-top-radius(0);
+				@include border-bottom-radius(0);
+				box-shadow: 0 0 0 0;
+				font-size: 18pt;
+			}
+			textarea {
+				border: 1px solid darken(white,10%);
+				box-shadow: 0 0 0 0;
+				@include border-top-radius(0);
+				@include border-bottom-radius(0);
+				font-size: 18pt;
+				min-height: 150px;
+			}
+			.btn {
+				width: 300px;
+				display: block;
+				margin: 50px auto 0;
+			}
+		}
+	}
+	.videoFrame {
+		margin: 0 auto;
+		width: 853px;
+		height: 480px;
+		@include transition(all 0.5s $authenticMotion);
+	}
+}
+#Products {
+	h2 {
+		margin-top: 100px;
+		span {
+			background: white;
+		}
+	}
+	.singleProduct {
+		width: 25%;
+		display: inline-block;
+		box-sizing: border-box;
+		text-align: center;
+		line-height: normal;
+		margin: 25px auto;
+		padding: 15px;
+		img {
+			height: 200px;
+			width: auto;
+			margin: 0 auto 15px;
+			display: block;
+			vertical-align: top;
 		}
 	}
 }
