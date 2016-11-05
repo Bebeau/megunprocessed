@@ -159,11 +159,11 @@ Author URI: http://theinitgroup.com
       -moz-transition: -moz-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
   .m-scooch .arrows.in .arrow.left, .m-scooch .arrows.in .arrow.right {
-    -webkit-transform: translate(0, -20px);
-    -moz-transform: translate(0, -20px);
-    -ms-transform: translate(0, -20px);
-    -o-transform: translate(0, -20px);
-    transform: translate(0, -20px);
+    -webkit-transform: translate(0, 0);
+    -moz-transform: translate(0, 0);
+    -ms-transform: translate(0, 0);
+    -o-transform: translate(0, 0);
+    transform: translate(0, 0);
     -webkit-transition: -webkit-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     -moz-transition: -moz-transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -587,6 +587,7 @@ header {
   header .menu-home-page-container {
     position: fixed;
     left: 0;
+    top: 0;
     width: 100%;
     z-index: 9;
     background: rgba(145, 218, 186, 0.95);
@@ -658,11 +659,11 @@ header {
           -moz-transition: all 0.3s ease-in-out;
           transition: all 0.3s ease-in-out; }
     header.open .menu-home-page-container {
-      -webkit-transform: translate(0, -81px);
-      -moz-transform: translate(0, -81px);
-      -ms-transform: translate(0, -81px);
-      -o-transform: translate(0, -81px);
-      transform: translate(0, -81px);
+      -webkit-transform: translate(0, 0);
+      -moz-transform: translate(0, 0);
+      -ms-transform: translate(0, 0);
+      -o-transform: translate(0, 0);
+      transform: translate(0, 0);
       -webkit-transition: all 0.3s ease-in-out;
       -moz-transition: all 0.3s ease-in-out;
       transition: all 0.3s ease-in-out; }
@@ -1226,11 +1227,12 @@ footer {
     margin: 60px 0 0;
     font-size: 24pt;
     line-height: normal;
-    color: #463179; }
+    color: gray; }
   footer #SignUp {
-    border: 1px solid #f2f2f2;
+    border: 1px solid #fcfcfc;
     box-sizing: border-box;
-    padding: 25px; }
+    padding: 25px;
+    background: #f2f2f2; }
     footer #SignUp h3 {
       margin: 0 0 15px;
       padding: 0;
@@ -1432,6 +1434,9 @@ footer {
     header .btn-menu {
       float: right; }
 
+  .mobile {
+    display: block; }
+
   .header-CTA #purpleBar {
     background: none; }
     .header-CTA #purpleBar #BarTitle {
@@ -1461,7 +1466,7 @@ footer {
   #filters .dropdown {
     width: auto;
     display: block;
-    margin: 0 15px; }
+    margin: 15px; }
 
   h2.secTitle {
     font-size: 14pt;
@@ -1469,5 +1474,191 @@ footer {
     h2.secTitle a {
       display: none; }
 
-  .listing h3 {
-    margin-bottom: 25px; } }
+  .listing {
+    margin-bottom: 0; }
+    .listing h3 {
+      margin-top: 10px;
+      margin-bottom: 25px; }
+
+  .videoCarousel {
+    padding: 0; }
+    .videoCarousel .upLogo {
+      width: 250px; }
+    .videoCarousel .upDesc {
+      width: auto; }
+    .videoCarousel iframe {
+      height: 170px; }
+    .videoCarousel .m-scooch-videos {
+      display: none; }
+    .videoCarousel .btn {
+      width: auto;
+      font-size: 14pt;
+      margin: 25px 15px 0;
+      padding: 0; }
+
+  footer {
+    margin: 25px 0 0;
+    padding: 15px 0; }
+    footer h2 {
+      margin: 0;
+      font-size: 60pt;
+      text-align: center; }
+    footer .socialWrap {
+      position: relative;
+      right: 0;
+      bottom: 0;
+      text-align: center;
+      margin: 0;
+      width: 100%; }
+    footer .timeline {
+      display: none; }
+    footer #SignUp {
+      display: none; }
+    footer #legal {
+      margin-top: 25px; }
+      footer #legal ul li {
+        display: block; }
+        footer #legal ul li a {
+          display: block;
+          border: none;
+          font-size: 12pt;
+          line-height: 30px; }
+
+  .single-content {
+    padding: 15px; }
+    .single-content h1 {
+      margin: 0 0 15px;
+      font-size: 18pt; }
+
+  .widget iframe {
+    width: 100%;
+    height: 134px; }
+  .widget h3 {
+    font-size: 14pt;
+    letter-spacing: 0;
+    line-height: normal; }
+
+  .social-share {
+    margin: 50px 0 0; }
+    .social-share .share-text {
+      line-height: normal;
+      font-size: 18pt; }
+
+  #header-pad {
+    padding-top: 105px; }
+
+  #Products h2 {
+    margin: 50px 0 25px; }
+    #Products h2:after {
+      display: none; }
+    #Products h2 span {
+      margin: 0;
+      padding: 0;
+      display: block;
+      text-align: center; }
+  #Products .singleProduct {
+    width: 100%;
+    vertical-align: top;
+    margin: 0; }
+    #Products .singleProduct img {
+      height: auto; }
+
+  #contactfrm button {
+    width: 100%;
+    display: block; }
+
+  #Videos .videoWrap {
+    height: auto; }
+    #Videos .videoWrap .videoCopy {
+      padding: 15px;
+      width: 100%; }
+      #Videos .videoWrap .videoCopy h2 {
+        margin-top: 25px;
+        font-size: 16pt; }
+      #Videos .videoWrap .videoCopy .btn {
+        width: 100%;
+        font-size: 12pt;
+        padding-top: 0;
+        margin-top: 25px; }
+      #Videos .videoWrap .videoCopy .videoImageMobile {
+        width: 112%;
+        max-width: 112%;
+        margin: -15px -15px 25px;
+        box-sizing: none; }
+    #Videos .videoWrap .videoImage {
+      display: none; }
+  #Videos .videoCarousel h2 {
+    margin-bottom: 15px; }
+  #Videos .videoCarousel .btn {
+    margin: 25px 15px; }
+  #Videos .videoFrame {
+    width: 90%;
+    height: 160px;
+    margin: 0 15px; }
+  #Videos .videoTestimonials {
+    padding: 15px; }
+    #Videos .videoTestimonials h2 {
+      margin: 25px 0; }
+    #Videos .videoTestimonials .wrap {
+      width: auto; }
+      #Videos .videoTestimonials .wrap blockquote {
+        width: 100%;
+        padding: 0;
+        display: block;
+        min-height: auto;
+        margin-bottom: 25px; }
+      #Videos .videoTestimonials .wrap cite {
+        width: 100%;
+        display: block; }
+        #Videos .videoTestimonials .wrap cite img {
+          width: 100px;
+          height: 100px; }
+    #Videos .videoTestimonials .m-scooch-controls {
+      width: auto; }
+  #Videos .videoServices {
+    height: auto; }
+    #Videos .videoServices h2 {
+      margin: 25px 0; }
+      #Videos .videoServices h2:before, #Videos .videoServices h2:after {
+        width: 30%; }
+    #Videos .videoServices .service {
+      text-align: center;
+      margin: 40px 0 50px; }
+      #Videos .videoServices .service h3 {
+        font-size: 14pt; }
+        #Videos .videoServices .service h3 i {
+          display: block;
+          margin: 0 0 15px;
+          font-size: 48pt; }
+      #Videos .videoServices .service p {
+        padding: 0; }
+  #Videos .videoConsultation {
+    height: auto; }
+    #Videos .videoConsultation h2 {
+      margin: 25px 0; }
+    #Videos .videoConsultation #consultationfrm .form-group {
+      margin: 0; }
+    #Videos .videoConsultation #consultationfrm input {
+      height: 40px;
+      line-height: 40px;
+      font-size: 12pt; }
+    #Videos .videoConsultation #consultationfrm textarea {
+      font-size: 12pt; }
+    #Videos .videoConsultation #consultationfrm .btn {
+      width: 100%;
+      margin-top: 15px; }
+
+  h2.secTitle {
+    text-align: center; }
+    h2.secTitle:after {
+      display: none; }
+    h2.secTitle span {
+      display: block;
+      margin: 15px 0;
+      padding: 0; }
+
+  #singleRecipe .single-content {
+    padding: 15px; }
+
+  .related-posts {
+    margin-bottom: 0; } }

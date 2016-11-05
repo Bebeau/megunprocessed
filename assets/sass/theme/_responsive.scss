@@ -36,6 +36,9 @@
 			float: right;
 		}
 	}
+	.mobile {
+		display: block;
+	}
 	.header-CTA {
 		#purpleBar {
 			background: none;
@@ -76,7 +79,7 @@
 		.dropdown {
 			width: auto;
 			display: block;
-			margin: 0 15px;
+			margin: 15px;
 		}
 	}
 	h2.secTitle {
@@ -87,8 +90,258 @@
 		}
 	}
 	.listing {
+		margin-bottom: 0;
 		h3 {
+			margin-top: 10px;
 			margin-bottom: 25px;
 		}
+	}
+	.videoCarousel {
+		padding: 0;
+		.upLogo {
+			width: 250px;
+		}
+		.upDesc {
+			width: auto;
+		}
+		iframe {
+			height: 170px;
+		}
+		.m-scooch-videos {
+			display: none;
+		}
+		.btn {
+			width: auto;
+			font-size: 14pt;
+			margin: 25px 15px 0;
+			padding: 0;
+		}
+	}
+	footer {
+		margin: 25px 0 0;
+		padding: 15px 0;
+		h2 {
+			margin: 0;
+			font-size: 60pt;
+			text-align: center;
+		}
+		.socialWrap {
+			position: relative;
+			right: 0;
+			bottom: 0;
+			text-align: center;
+			margin: 0;
+			width: 100%;
+		}
+		.timeline {
+			display: none;
+		}
+		#SignUp {
+			display: none;
+		}
+		#legal {
+			margin-top: 25px;
+			ul {
+				li {
+					display: block;
+					a {
+						display: block;
+						border: none;
+						font-size: 12pt;
+						line-height: 30px;
+					}
+				}
+			}
+		}
+	}
+	.single-content {
+		padding: 15px;
+		h1 {
+			margin: 0 0 15px;
+			font-size: 18pt;
+		}
+	}
+	.widget {
+		iframe {
+			width: 100%;
+			height: 134px;
+		}
+		h3 {
+			font-size: 14pt;
+			letter-spacing: 0;
+			line-height: normal;
+		}
+	}
+	.social-share {
+		margin: 50px 0 0;
+		.share-text{
+			line-height: normal;
+			font-size: 18pt;
+		}
+	}
+	#header-pad {
+		padding-top: 105px;
+	}
+	#Products {
+		h2 {
+			margin: 50px 0 25px;
+			&:after {
+				display: none;
+			}
+			span {
+				margin: 0;
+				padding: 0;
+				display: block;
+				text-align: center;
+			}
+		}
+		.singleProduct {
+			width: 100%;
+			vertical-align: top;
+			margin: 0;
+			img {
+				height: auto;
+			}
+		}
+	}
+	#contactfrm {
+		button {
+			width: 100%;
+			display: block;
+		}
+	}
+	#Videos {
+		.videoWrap {
+			height: auto;
+			.videoCopy {
+				padding: 15px;
+				width: 100%;
+				h2 {
+					margin-top: 25px;
+					font-size: 16pt;
+				}
+				.btn {
+					width: 100%;
+					font-size: 12pt;
+					padding-top: 0;
+					margin-top: 25px;
+				}
+				.videoImageMobile {
+					width: 112%;
+					max-width: 112%;
+					margin: -15px -15px 25px;
+					box-sizing: none;
+				}
+			}
+			.videoImage {
+				display: none;
+			}
+		}
+		.videoCarousel {
+			h2 {
+				margin-bottom: 15px;
+			}
+			.btn {
+				margin: 25px 15px;
+			}
+		}
+		.videoFrame {
+			width: 90%;
+			height: 160px;
+			margin: 0 15px;
+		}
+		.videoTestimonials {
+			padding: 15px;
+			h2 {
+				margin: 25px 0;
+			}
+			.wrap {
+				width: auto;
+				blockquote {
+					width: 100%;
+					padding: 0;
+					display: block;
+					min-height: auto;
+					margin-bottom: 25px;
+				}	
+				cite {
+					width: 100%;
+					display: block;
+					img {
+						width: 100px;
+						height: 100px;
+					}
+				}
+			}
+			.m-scooch-controls {
+				width: auto;
+			}
+		}
+		.videoServices {
+			height: auto;
+			h2 {
+				margin: 25px 0;
+				&:before, &:after {
+					width: 30%;
+				}
+			}
+			.service {
+				text-align: center;
+				margin: 40px 0 50px;
+				h3 {
+					font-size: 14pt;
+					i {
+						display: block;
+						margin: 0 0 15px;
+						font-size: 48pt;
+					}
+				}
+				p {
+					padding: 0;
+				}
+			}
+		}
+		.videoConsultation {
+			height: auto;
+			h2 {
+				margin: 25px 0;
+			}
+			#consultationfrm {
+				.form-group {
+					margin: 0;
+				}
+				input {
+					height: 40px;
+					line-height: 40px;
+					font-size: 12pt;
+				}
+				textarea {
+					font-size: 12pt;
+				}
+				.btn {
+					width: 100%;
+					margin-top: 15px;
+				}
+			}
+		}
+	}
+	h2.secTitle {
+		text-align: center;
+		&:after {
+			display: none;
+		}
+		span {
+			display: block;
+			margin: 15px 0;
+			padding: 0;
+		}
+	}
+	#singleRecipe {
+		.single-content {
+			padding: 15px;
+		}
+	}
+	.related-posts {
+		margin-bottom: 0;
 	}
 }

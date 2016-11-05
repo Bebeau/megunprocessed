@@ -11,6 +11,9 @@ get_header(); ?>
     		<div class="videoCopy">
                 <div class="outer">
                     <div class="inner">
+                        <div class="visible-xs">
+                            <img class="videoImageMobile" src="<?php echo bloginfo('template_directory'); ?>/assets/images/cameraman.jpg" alt="" />
+                        </div>
             			<img src="<?php echo bloginfo('template_directory'); ?>/assets/images/up_logo.jpg" alt="" />
                         <?php the_content(); ?>
                         <a href="#videoConsultation" class="btn">Get A Free Consultation</a>
@@ -75,6 +78,21 @@ get_header(); ?>
                                     }
                                 echo '</div>';
                             echo '</div>';
+                            echo '<div class="mobile">';
+                                foreach($videos as $video) {
+
+                                    if(wp_is_mobile()) {
+                                        
+                                        if($video['type'] === "youtube") {
+                                            echo '<iframe src="https://www.youtube.com/embed/'.$video['id'].'" class="videoFrame" width="100%" frameborder="0" allowfullscreen></iframe>';
+                                        } elseif($video['type'] === 'vimeo') {
+                                            echo '<iframe src="https://player.vimeo.com/video/'.$video['id'].'" class="videoFrame" width="100%" frameborder="0" allowfullscreen></iframe>';
+                                        }
+
+                                    }
+
+                                }
+                            echo '</div>';
                         }
 
                     ?>
@@ -108,7 +126,7 @@ get_header(); ?>
                             if(!empty($name) && !empty($title) && !empty($company)) {
                                 echo '<div class="m-item active">';
                                     echo '<div class="wrap">';
-                                        echo '<cite>';
+                                        echo '<cite class="hidden-xs">';
                                             the_post_thumbnail();
                                             echo '<span class="name">'.$name.'</span>';
                                             echo '<span class="title">'.$title.'</span>';
@@ -119,6 +137,12 @@ get_header(); ?>
                                                 the_content();
                                             echo '</div></div>';
                                         echo '</blockquote>';
+                                        echo '<cite class="visible-xs">';
+                                            the_post_thumbnail();
+                                            echo '<span class="name">'.$name.'</span>';
+                                            echo '<span class="title">'.$title.'</span>';
+                                            echo '<span class="company">'.$company.'</span>';
+                                        echo '</cite>';
                                     echo '</div>';
                                 echo '</div>';
                             }
@@ -181,34 +205,38 @@ get_header(); ?>
                 <div class="inner">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-12">
+                            <div class="col-sm-8 col-sm-offset-2">
                                 <h2 class="secTitle"><span>Get A Free Consultation</span></h2>
                             </div>
                         </div>
-                        <form role="form" action="" id="consultationfrm" data-form="consultation">
-                            <div class="row">
-                                <div class="form-group col-sm-6">
-                                    <label for="firstname" class="control-label">First Name <span class="required">*</span></label>
-                                    <input type="text" name="firstname" id="firstname" class="form-control" placeholder="jane"/>
-                                </div>
-                                <div class="form-group col-sm-6">
-                                    <label for="lastname" class="control-label">Last Name <span class="required">*</span></label>
-                                    <input type="text" name="lastname" id="lastname" class="form-control" placeholder="doe"/>
-                                </div>
+                        <div class="row">
+                            <div class="col-sm-8 col-sm-offset-2">
+                                <form role="form" action="" id="consultationfrm" data-form="consultation">
+                                    <div class="row">
+                                        <div class="form-group col-sm-6">
+                                            <label for="firstname" class="control-label">First Name <span class="required">*</span></label>
+                                            <input type="text" name="firstname" id="firstname" class="form-control" placeholder="jane"/>
+                                        </div>
+                                        <div class="form-group col-sm-6">
+                                            <label for="lastname" class="control-label">Last Name <span class="required">*</span></label>
+                                            <input type="text" name="lastname" id="lastname" class="form-control" placeholder="doe"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailaddress" class="control-label">Email <span class="required">*</span></label>
+                                        <input type="text" name="emailaddress" id="emailaddress" class="form-control" placeholder="email@address.." />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="message" class="control-label">Message <span class="required">*</span></label>
+                                        <textarea type="text" name="message" id="message" class="form-control" placeholder="How can I help?"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-submit">Submit</button>
+                                    </div>
+                                    <input type="hidden" name="password" id="password" val="" />
+                                </form>
                             </div>
-                            <div class="form-group">
-                                <label for="emailaddress" class="control-label">Email <span class="required">*</span></label>
-                                <input type="text" name="emailaddress" id="emailaddress" class="form-control" placeholder="email@address.." />
-                            </div>
-                            <div class="form-group">
-                                <label for="message" class="control-label">Message <span class="required">*</span></label>
-                                <textarea type="text" name="message" id="message" class="form-control" placeholder="How can I help?"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-submit">Submit</button>
-                            </div>
-                            <input type="hidden" name="password" id="password" val="" />
-                        </form>
+                        </div>
                     </div>
                 </div>
             </div>

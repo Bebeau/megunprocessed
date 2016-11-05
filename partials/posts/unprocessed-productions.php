@@ -65,7 +65,13 @@
                 }
 
             ?>
-            <a href="<?php echo $videos_link; ?>" class="btn">Get A Free Consultation</a>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <a href="<?php echo $videos_link; ?>" class="btn">Get A Free Consultation</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
