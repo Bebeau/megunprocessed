@@ -21,7 +21,7 @@
 		</ul>
 
 	</div>
-
+	
 	<div class="dropdown">  
 
 		<button id="FilterDropdown" class="btn btn-blue btn-filter" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
